@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="docs/banner.svg" alt="dsh-purge-safe" width="720">
+  <img src="docs/banner.svg" alt="pi-purge" width="720">
 </p>
 
-<h1 align="center">⚔️ DeepSeek Harness cybersecurity red-team tool (dsh-purge-safe)</h1>
+<h1 align="center">⚔️ DeepSeek Harness cybersecurity red-team tool (pi-purge)</h1>
 
 <p align="center"><strong>Version 2.0.0</strong></p>
 
@@ -56,37 +56,37 @@ Join our Telegram community to learn, exchange ideas, get technical support, and
 
 ## What this is
 
-**dsh-purge-safe** is a cybersecurity red-team plugin for the official [DeepSeek Harness](https://www.deepseek.com/harness/) already installed on your machine. This full-featured edition targets **DSH 0.2.2-rc.3** and adds **Super Agent** support. Official **Web** (`dsh web`) and the official **desktop EXE** are both supported. Install and Apply them separately.
+**pi-purge** is a cybersecurity red-team plugin for the official [DeepSeek Harness](https://www.deepseek.com/harness/) already installed on your machine. This full-featured edition targets **DSH 0.2.2-rc.3** and adds **Super Agent** support. Official **Web** (`dsh web`) and the official **desktop EXE** are both supported. Install and Apply them separately.
 
 Harness does more than forward a prompt. It rewrites prompts, approval gates, sandbox policy, and session migration at runtime. Asking only “will the model answer” treats a host-layer block as a model refusal. This plugin separates those two layers on your own install, for controlled evaluation and for seeing which default policy is too tight.
 
 | You get | What it does |
 |---|---|
-| **dsh-purge-safe dock** | A button beside the session title opens the right dock. Two pages: Clean and Drill |
+| **pi-purge dock** | A button beside the session title opens the right dock. Two pages: Clean and Drill |
 | **Clean** | Grouped patch status, Apply / Restore / Uninstall, prompt editor, multiple rule sets |
 | **Drill** | Built into the stable release. After authorization: assets and the local environment. The skill library and knowledge base ship with it. |
 | **Host policy** | Default copy, permission policy, and tool limits. Official capabilities stay. No second invented identity |
 | **On start** | The local build keeps automatic Apply off by default. Use Clean → Apply; startup reapplication can be configured when needed. |
 
-No hardcoded drive letters. It looks at `$DSH_HOME`, `.dsh` next to the dsh launcher, then `~/.dsh`. It does not patch the Harness source tree. **Apply** on the **Clean** page of **dsh-purge-safe** is what writes the changes. Identity comes from the encrypted prompt shipped in the plugin, the text the prompt box shows by default. The host prompt file is not read.
+No hardcoded drive letters. It looks at `$DSH_HOME`, `.dsh` next to the dsh launcher, then `~/.dsh`. It does not patch the Harness source tree. **Apply** on the **Clean** page of **pi-purge** is what writes the changes. Identity comes from the encrypted prompt shipped in the plugin, the text the prompt box shows by default. The host prompt file is not read.
 
 It only touches the official `@deepseek-ai` packages and local config on the user's machine. It is not a public scanner and not an attack kit for third-party sites. The repo does not ship malware, unauthorized-exploit scripts, or payloads aimed at the public internet.
 
 ---
 
-## Resale of the original is prohibited. Forks must attribute.
+## This project is a derivative work. Upstream attribution is required.
 
-## Attribution required
+## Provenance and attribution
 
-**Resale of the original build is prohibited.** Paid resale, re-skinning for store listings, and distribution as a commercial product are not permitted.
+**pi-purge is a derivative of [dsh-purge-safe](https://github.com/CallMeGuLab/dsh-purge-safe) by CallMeGuLab**, renamed, repackaged and maintained by zhuguang-ZFG. All copyright in the upstream code, prompts and skill library remains with the original author; this repository redistributes it under Apache-2.0 with attribution preserved.
 
-**Forks must attribute** and name the source repository: [dsh-purge-safe / CallMeGuLab](./NOTICE). Same if you borrow the name, ideas, code, or prompts.
+The upstream attribution rule carries forward: **downstream forks must attribute** and name both this repository [pi-purge / zhuguang-ZFG](https://github.com/zhuguang-ZFG/pi-purge) and the upstream [dsh-purge-safe / CallMeGuLab](https://github.com/CallMeGuLab/dsh-purge-safe).
 
-Removing attribution, concealing the source, or reselling the original will be pursued by the maintainers.
+**Resale is prohibited.** Paid resale, re-skinning for store listings, or distribution as a commercial product is not permitted for this project or the upstream original.
 
 ## License
 
-This repo is [Apache License 2.0](./LICENSE). Forks and redistributions must keep the copyright notice and [NOTICE](./NOTICE), and name [dsh-purge-safe / CallMeGuLab](./NOTICE). Resale of the original is prohibited.
+This repo is [Apache License 2.0](./LICENSE). Forks and redistributions must keep the copyright notice and [NOTICE](./NOTICE), and name [pi-purge / zhuguang-ZFG](https://github.com/zhuguang-ZFG/pi-purge) plus upstream [dsh-purge-safe / CallMeGuLab](https://github.com/CallMeGuLab/dsh-purge-safe).
 
 ---
 
@@ -137,26 +137,26 @@ Unmatched patches remain pending or skipped; files are not rewritten blindly.
 
 ## Install
 
-Extract this archive to a local directory named `dsh-purge-safe`. Install only into the host you actually use.
+Extract this archive to a local directory named `pi-purge`. Install only into the host you actually use.
 
 ```sh
 # Official dsh web; replace the path with your extracted directory
-dsh plugin --profile web add /absolute/path/to/dsh-purge-safe
+dsh plugin --profile web add /absolute/path/to/pi-purge
 
 # Official desktop EXE
-dsh plugin --profile desktop add /absolute/path/to/dsh-purge-safe
+dsh plugin --profile desktop add /absolute/path/to/pi-purge
 ```
 
-Fully quit and reopen that host. Click **dsh-purge-safe** beside the session title → **Clean** → **Apply**. A successful Apply restarts the host once. Verify the active home and patch status with `/purge status`.
+Fully quit and reopen that host. Click **pi-purge** beside the session title → **Clean** → **Apply**. A successful Apply restarts the host once. Verify the active home and patch status with `/purge status`.
 
 <a id="manual"></a>
 
 ### Manual install
 
 1. Find the active `$DSH_HOME` containing `profiles/web` or `profiles/desktop`.
-2. Place the extracted plugin at `$DSH_HOME/plugins/dsh-purge-safe`.
-3. In that host profile's `package.json`, append `"dsh-purge-safe": "file:../../plugins/dsh-purge-safe"` to `dependencies` and `"dsh-purge-safe"` to `dsh.profile.bundles`. Keep existing entries.
-4. Run `pnpm install` inside that profile directory. Confirm `node_modules/dsh-purge-safe/package.json` exists.
+2. Place the extracted plugin at `$DSH_HOME/plugins/pi-purge`.
+3. In that host profile's `package.json`, append `"pi-purge": "file:../../plugins/pi-purge"` to `dependencies` and `"pi-purge"` to `dsh.profile.bundles`. Keep existing entries.
+4. Run `pnpm install` inside that profile directory. Confirm `node_modules/pi-purge/package.json` exists.
 5. Fully quit and reopen the host, then use **Clean → Apply**.
 
 Uninstall through **Clean → Uninstall** or `/purge uninstall`. This archive uses local installation; it does not include a remote repository install address.
@@ -174,11 +174,11 @@ Runtime files live under `$DSH_HOME`: `prompt-inject.md`, `rules/`, `skills/`, `
 ## Usage
 
 ```sh
-dsh-purge-safe --status
-dsh-purge-safe --apply
-dsh-purge-safe --revert
-dsh-purge-safe --uninstall
-dsh-purge-safe --edit
+pi-purge --status
+pi-purge --apply
+pi-purge --revert
+pi-purge --uninstall
+pi-purge --edit
 
 /purge status | apply | revert | uninstall | edit | help
 /rules list | use <id> | create <id> | delete <id> | reset | help
@@ -186,7 +186,7 @@ dsh-purge-safe --edit
 
 # If another plugin already owns /rewind (or /purge, /rules, /skills), that
 # name is skipped or remounted as /purge-rewind. Other commands, tools, and
-# /dsh-purge-safe/* routes keep working.
+# /pi-purge/* routes keep working.
 
 purge_status   purge_apply   purge_revert
 ```
@@ -199,7 +199,7 @@ If the **same task works in standard but fails in minimal or PTC**, preset `run_
 
 ### Response speed
 
-DSH runs Bash calls in a tool batch one at a time. Older dsh-purge-safe releases raised the default foreground wait from 60 seconds to 10 minutes, so one slow command could hold up later calls for that long. Patch #21 now restores marked plugin values to the official 60-second default. Unmarked timeouts and other custom values are preserved; an unmarked 10-minute value cannot reliably be distinguished from a user setting.
+DSH runs Bash calls in a tool batch one at a time. Older pi-purge releases raised the default foreground wait from 60 seconds to 10 minutes, so one slow command could hold up later calls for that long. Patch #21 now restores marked plugin values to the official 60-second default. Unmarked timeouts and other custom values are preserved; an unmarked 10-minute value cannot reliably be distinguished from a user setting.
 
 For a shorter wait in `dsh web` on macOS/Linux, add this entry to `$DSH_HOME/profiles/web/cordis.patch.yml` (normally `~/.dsh/profiles/web/cordis.patch.yml`). Edit an existing entry with the same id instead of adding a duplicate. This profile layer is applied after the bundled configuration, so future plugin applies keep the override.
 
@@ -253,7 +253,7 @@ Apply, on start or when you click Apply:
 flowchart TD
   A["Start or click Apply"] --> B{"Patch already in place?"}
   B -->|yes| C["Skip"]
-  B -->|no| D["Back up the original as .dshpurge.bak"]
+  B -->|no| D["Back up the original as .pipurge.bak"]
   D --> E["Replace the matched files"]
   E --> F["Override the shim"]
   F --> G["Inject the encrypted prompt shipped in the plugin, the text the prompt box shows by default"]
@@ -266,7 +266,7 @@ flowchart TD
   A["Restart or new session"] --> B["Inject the plugin's encrypted default. No save click, and no host prompt file"]
 ```
 
-Prompt injection and ruleset decision at every turn. The three inputs on the left are what you control in the dsh-purge-safe panel; the dotted edges show which decision each one drives:
+Prompt injection and ruleset decision at every turn. The three inputs on the left are what you control in the pi-purge panel; the dotted edges show which decision each one drives:
 
 ```mermaid
 flowchart TD
@@ -299,7 +299,7 @@ flowchart TD
 
 ## Restore
 
-- Each target is copied to `<file>.dshpurge.bak` before the first apply.
+- Each target is copied to `<file>.pipurge.bak` before the first apply.
 - **Restore** or `/purge revert` copies backups back and deletes them. With no backup, shim lines written by this plugin are stripped.
 - `prompt-inject.md` is a user file and is kept.
 - **Uninstall** restores first if patches were applied, then deletes the inject file, rule library, and the plugin itself.

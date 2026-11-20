@@ -8,7 +8,7 @@
 对照双方：
 
 - 上游：[Jueze-2019/dsh-redteam-mode](https://github.com/Jueze-2019/dsh-redteam-mode) 本地树 `克隆项目/dsh-redteam-mode-main`，提交 `COMMIT_REMOVED`（`v0.14.0-4`）。实现以 `packages/redteam-bundle/` 为准（与 `packages/redteam-store` / `redteam-tools` / `redteam-ui` 哈希一致）。
-- 插件：`dsh-purge-safe` **1.1.74**，红队在 `lib/redteam/`、`skills/redteam/`、`presets/redteam/`；浏览器侧真正生效的是根目录 `client.js` 里 `__DSH_PURGE_DRILL_*` 嵌入块，源是 `lib/redteam/client.js`。
+- 插件：`pi-purge` **1.1.74**，红队在 `lib/redteam/`、`skills/redteam/`、`presets/redteam/`；浏览器侧真正生效的是根目录 `client.js` 里 `__PI_PURGE_DRILL_*` 嵌入块，源是 `lib/redteam/client.js`。
 
 决策（已拍板）：
 
@@ -48,7 +48,7 @@
 ## 1. 总原则
 
 1. **按块摘，禁止整文件替换。** `store-core.js`（346KB vs 398KB）、`client.js`（281KB vs 345KB）、`tools.js` 都是「上游多一块、插件也多一块」。整文件覆盖会冲掉 A–F 和环境适配。
-2. **包名保持插件自己的。** 上游工具行是 `dsh-redteam-mode/tools`，插件是 `dsh-purge-safe/redteam/tools`。抄预设或注释时改包名。浏览器模块 id 保持 `dsh-purge-safe`，不要改成 `dsh-redteam-mode`。
+2. **包名保持插件自己的。** 上游工具行是 `dsh-redteam-mode/tools`，插件是 `pi-purge/redteam/tools`。抄预设或注释时改包名。浏览器模块 id 保持 `pi-purge`，不要改成 `dsh-redteam-mode`。
 3. **数据目录仍是 `$DSH_HOME/redteam`。** 新增的 `sessions.json` 写在这个根下，和现有 `engagements/`、`settings.json`、`config.json` 并列。
 4. **改完 `lib/redteam/client.js` 必须跑** `node scripts/build-client.mjs`，把工厂嵌进根目录 `client.js`。只改 `lib/redteam/client.js` 而桌面/Web 不重建，审核人在界面上看不到任何变化。
 5. **不要加 worker 预设，不要删环境适配，不要并装上游包。**
@@ -272,13 +272,13 @@ else if (st.tab === 'knowledge') body = h(KnowledgeTab, {
 现在挂载是（约 L8516–8517）：
 
 ```js
-h(__dshPurgeDrill.Panel, { embedded: true })
+h(__piPurgeDrill.Panel, { embedded: true })
 ```
 
 改成传入当前会话 id（同文件已有 `currentSessionId(sessions)`，环境适配门禁约 L8260 在用）：
 
 ```js
-h(__dshPurgeDrill.Panel, { embedded: true, sessionId: currentSid })
+h(__piPurgeDrill.Panel, { embedded: true, sessionId: currentSid })
 ```
 
 `currentSid` 的取法与 dock 里其它逻辑一致，随左侧会话切换更新。不传 session 时跟随降级为现在的 `bootstrap.current`，不能崩。
@@ -289,7 +289,7 @@ h(__dshPurgeDrill.Panel, { embedded: true, sessionId: currentSid })
 node scripts/build-client.mjs
 ```
 
-检查 `__DSH_PURGE_DRILL_BEGIN__` / `END` 标记还在、片段能解析。不要手改嵌入块。
+检查 `__PI_PURGE_DRILL_BEGIN__` / `END` 标记还在、片段能解析。不要手改嵌入块。
 
 ### 3.9 改动 6 不需要的东西
 

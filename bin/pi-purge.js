@@ -7,7 +7,7 @@ const args = process.argv.slice(2);
 
 function printStatus(state) {
   const out = [];
-  out.push("dsh-purge-safe 状态 / Status");
+  out.push("pi-purge 状态 / Status");
   out.push("  宿主 / surface " + (state.surface || "web"));
   out.push("  DSH_HOME      " + state.dsh_home);
   if (state.desktop_install) out.push("  桌面安装       " + state.desktop_install);
@@ -39,13 +39,13 @@ async function main() {
   const mode = args.find((a) => ["--apply", "--revert", "--uninstall", "--status", "--edit", "--help"].includes(a));
 
   if (mode === "--help" || args.includes("-h")) {
-    console.log(`dsh-purge-safe 用法:
-  dsh-purge-safe --status     显示状态
-  dsh-purge-safe --apply      应用全部清洗（提示词+代码+shim+override）
-  dsh-purge-safe --revert     回滚还原
-  dsh-purge-safe --uninstall  卸载插件（已应用则先还原）
-  dsh-purge-safe --edit       编辑注入文件 prompt-inject.md
-  dsh-purge-safe --help       帮助`);
+    console.log(`pi-purge 用法:
+  pi-purge --status     显示状态
+  pi-purge --apply      应用全部清洗（提示词+代码+shim+override）
+  pi-purge --revert     回滚还原
+  pi-purge --uninstall  卸载插件（已应用则先还原）
+  pi-purge --edit       编辑注入文件 prompt-inject.md
+  pi-purge --help       帮助`);
     return;
   }
 
@@ -142,6 +142,6 @@ async function main() {
 }
 
 main().catch((e) => {
-  console.error("[dsh-purge-safe] error:", e);
+  console.error("[pi-purge] error:", e);
   process.exit(1);
 });

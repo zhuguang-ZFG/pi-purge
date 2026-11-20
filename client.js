@@ -1,5 +1,5 @@
-window.__ModuleLoader__.load({ id: "dsh-purge-safe", factory: (require) => {
-/* __DSH_PURGE_FULLSCREEN_BEGIN__ */
+window.__ModuleLoader__.load({ id: "pi-purge", factory: (require) => {
+/* __PI_PURGE_FULLSCREEN_BEGIN__ */
 function resolveRuntimeDocument(options) {
   if (options && Object.prototype.hasOwnProperty.call(options, 'document')) {
     return options.document || null
@@ -288,8 +288,8 @@ function useWorkbenchFullscreen(React, elementRef, options = {}) {
 
   return { expanded, enter, exit, toggle, isExpanded }
 }
-/* __DSH_PURGE_FULLSCREEN_END__ */
-/* __DSH_PURGE_THEME_BEGIN__ */
+/* __PI_PURGE_FULLSCREEN_END__ */
+/* __PI_PURGE_THEME_BEGIN__ */
 /*
  * Shared product theme state.
  *
@@ -298,8 +298,8 @@ function useWorkbenchFullscreen(React, elementRef, options = {}) {
  * the settings shell can be rendered by host test doubles and in restricted
  * webviews where localStorage, MutationObserver, or matchMedia is unavailable.
  */
-const PRODUCT_THEME_KEY = "dsh-purge-safe-ui-theme";
-const PRODUCT_THEME_EVENT = "dsh-purge-safe-ui-theme-change";
+const PRODUCT_THEME_KEY = "pi-purge-ui-theme";
+const PRODUCT_THEME_EVENT = "pi-purge-ui-theme-change";
 const PRODUCT_THEME_MODES = Object.freeze(["dusk", "white", "system"]);
 const PRODUCT_THEME_DEFAULT = "system";
 
@@ -543,7 +543,7 @@ function createProductTheme(options = {}) {
 }
 
 const productTheme = createProductTheme();
-/* __DSH_PURGE_THEME_END__ */
+/* __PI_PURGE_THEME_END__ */
 
 		var module = { exports: {} };
 		var exports = module.exports;
@@ -552,14 +552,14 @@ const productTheme = createProductTheme();
 		const h = react.createElement;
 		const { useState, useEffect, useCallback, useRef, Component } = react;
 
-		const name = "dsh-purge-safe";
+		const name = "pi-purge";
 		const inject = ["slots", "locale"];
 		function fullscreenPortalHost() {
 			return document.fullscreenElement
 				|| document.querySelector('.dshp-dock[data-fullscreen="true"],.rt-full[data-fullscreen="true"]')
 				|| document.body;
 		}
-		const NS = "settings.dsh-purge-safe";
+		const NS = "settings.pi-purge";
 		let translate = (key) => key;
 		function useT() {
 			return translate;
@@ -642,15 +642,15 @@ const productTheme = createProductTheme();
 		function apiTimeoutMs(p, init) {
 			const path = String(p || "");
 			const method = String((init && init.method) || "GET").toUpperCase();
-			if (path.indexOf("/dsh-purge-safe/uninstall") !== -1) return 90000;
-			if (path.indexOf("/dsh-purge-safe/skill") !== -1) return method === "POST" ? 120000 : 20000;
+			if (path.indexOf("/pi-purge/uninstall") !== -1) return 90000;
+			if (path.indexOf("/pi-purge/skill") !== -1) return method === "POST" ? 120000 : 20000;
 			// status 会在"应用"期间被后端的同步落盘阻塞，默认 20s 必然被 abort，界面只会显示"读取失败: timeout"。
-			if (path.indexOf("/dsh-purge-safe/status") !== -1) return 120000;
-			if (path.indexOf("/dsh-purge-safe/override") !== -1) return 120000;
-			if (path.indexOf("/dsh-purge-safe/own-servers") !== -1) return 120000;
-			if (path.indexOf("/dsh-purge-safe/apply") !== -1) return 240000;
-			if (path.indexOf("/dsh-purge-safe/revert") !== -1) return 120000;
-			if (path.indexOf("/dsh-purge-safe/restart") !== -1) return 20000;
+			if (path.indexOf("/pi-purge/status") !== -1) return 120000;
+			if (path.indexOf("/pi-purge/override") !== -1) return 120000;
+			if (path.indexOf("/pi-purge/own-servers") !== -1) return 120000;
+			if (path.indexOf("/pi-purge/apply") !== -1) return 240000;
+			if (path.indexOf("/pi-purge/revert") !== -1) return 120000;
+			if (path.indexOf("/pi-purge/restart") !== -1) return 20000;
 			return 20000;
 		}
 		function isAbortError(e) {
@@ -706,7 +706,7 @@ const productTheme = createProductTheme();
 		}
 
 		function rulesApi(op, extra) {
-			return apiJson("/dsh-purge-safe/rules", {
+			return apiJson("/pi-purge/rules", {
 				method: "POST",
 				headers: { "content-type": "application/json" },
 				body: JSON.stringify(Object.assign({ op: op }, extra || {})),
@@ -723,9 +723,9 @@ const productTheme = createProductTheme();
 				headers: { "content-type": "application/json" },
 				body: JSON.stringify(Object.assign({ op: op }, extra || {})),
 			};
-			return apiJson("/dsh-purge-safe/skills", init).catch((e) => {
+			return apiJson("/pi-purge/skills", init).catch((e) => {
 				if (!skillsRouteMissing(e)) throw e;
-				return apiJson("/dsh-purge-safe/skill", init);
+				return apiJson("/pi-purge/skill", init);
 			});
 		}
 
@@ -735,9 +735,9 @@ const productTheme = createProductTheme();
 			nav: "规则设定",
 			"dock.clean": "清洗",
 			"dock.drill": "演练台",
-			"dock.toggle": "dsh-purge-safe",
-			"dock.newSession": "dsh-purge-safe",
-			"dock.inSession": "dsh-purge-safe",
+			"dock.toggle": "pi-purge",
+			"dock.newSession": "pi-purge",
+			"dock.inSession": "pi-purge",
 			"dock.redteam": "红队模式",
 			"dock.full": "全面浏览",
 			"dock.close": "收起",
@@ -752,7 +752,7 @@ const productTheme = createProductTheme();
 			"welcome.title": "用户须知",
 			"welcome.lead": "首次安装本插件时请阅读以下说明。确认后本窗不再弹出。",
 			"welcome.warn": "本插件免费开源。任何背着作者私自售卖、付费倒卖或借本项目盈利的行为，作者将依法追究法律责任。",
-			"welcome.body": "dsh-purge-safe 是 DeepSeek Harness 的本机网络安全红队评测与清洗插件。满血版本 + Super Agent 适配，面向 DSH 0.2.2-rc.3；优化提示词，降低拒绝率，提升稳定性。在受控本机环境中调整提示词与补丁，开展授权范围内的演练台操作。项目免费、非营利。",
+			"welcome.body": "pi-purge 是 DeepSeek Harness 的本机网络安全红队评测与清洗插件。满血版本 + Super Agent 适配，面向 DSH 0.2.2-rc.3；优化提示词，降低拒绝率，提升稳定性。在受控本机环境中调整提示词与补丁，开展授权范围内的演练台操作。项目免费、非营利。",
 			"welcome.repo": "",
 			"welcome.ban1": "禁止将本项目用于未授权的网络攻击、入侵、窃取数据、破坏系统或任何违法犯罪。",
 			"welcome.ban2": "禁止商业售卖、付费倒卖、黑灰产牟利，以及隐瞒作者的营利性再分发。",
@@ -778,7 +778,7 @@ const productTheme = createProductTheme();
 			"envGate.lead": "本机有的工具继续用，没有的已跳过，可以直接对话。",
 			"envGate.kaliHint": "检测到 Kali 时会直接用本机工具。没有的扫描器不会挡发送，对应技能不可用。",
 			"envGate.skip": "暂不配置",
-			"envGate.skipConfirm": "确认后这次可以继续对话。扫描和利用类技能仍会因为缺少工具而不可用，之后可以在 dsh-purge-safe → 环境适配里补路径。",
+			"envGate.skipConfirm": "确认后这次可以继续对话。扫描和利用类技能仍会因为缺少工具而不可用，之后可以在 pi-purge → 环境适配里补路径。",
 			"envGate.skipNo": "返回",
 			"envGate.skipYes": "确认暂不配置",
 			"envGate.go": "去环境适配",
@@ -847,7 +847,7 @@ const productTheme = createProductTheme();
 			"btn.revert": "还原",
 			"btn.uninstall": "卸载",
 			"btn.uninstall.busy": "卸载中…",
-			"uninstall.title": "卸载dsh-purge-safe",
+			"uninstall.title": "卸载pi-purge",
 			"uninstall.body": "是否卸载？卸载将还原回原版，并清除本插件的全部文件与补丁。",
 			"uninstall.confirm": "确认卸载",
 			"uninstall.cancel": "取消",
@@ -1010,7 +1010,7 @@ const productTheme = createProductTheme();
 			"patch.24": "preset fetch 启用",
 			"patch.25": "去掉官方默认身份（功能提示词不动）",
 			"patch.26": "minimal：去掉默认身份并打开 inject",
-			"patch.28": "dsh-liangshen（梁神）：phase-1 保留 dsh-purge-safe / dshpg 段",
+			"patch.28": "dsh-liangshen（梁神）：phase-1 保留 pi-purge / pipg 段",
 			"patch.70": "极简模式终端不再禁止网络",
 			"patch.71": "梁神去掉官方身份句",
 			"patch.29": "dsh-tool-web：外部 untrusted 拦截→可执行",
@@ -1103,9 +1103,9 @@ const productTheme = createProductTheme();
 			nav: "Rules",
 			"dock.clean": "Clean",
 			"dock.drill": "Drill",
-			"dock.toggle": "dsh-purge-safe",
-			"dock.newSession": "dsh-purge-safe",
-			"dock.inSession": "dsh-purge-safe",
+			"dock.toggle": "pi-purge",
+			"dock.newSession": "pi-purge",
+			"dock.inSession": "pi-purge",
 			"dock.redteam": "Red team",
 			"dock.full": "Full view",
 			"dock.close": "Collapse",
@@ -1120,7 +1120,7 @@ const productTheme = createProductTheme();
 			"welcome.title": "User notice",
 			"welcome.lead": "Please read this on first install. After you confirm, it will not appear again.",
 			"welcome.warn": "This plugin is free and open source. Anyone who sells, resells, or profits from it behind the author's back may face legal action.",
-			"welcome.body": "dsh-purge-safe is a local DeepSeek Harness plugin for security evaluation and cleaning. Full-featured edition with Super Agent support for DSH 0.2.2-rc.3, optimized prompts, fewer refusals, and improved stability. Adjust prompts and patches on a machine you control and use the drill console only within authorized scope. It is free and non-profit.",
+			"welcome.body": "pi-purge is a local DeepSeek Harness plugin for security evaluation and cleaning. Full-featured edition with Super Agent support for DSH 0.2.2-rc.3, optimized prompts, fewer refusals, and improved stability. Adjust prompts and patches on a machine you control and use the drill console only within authorized scope. It is free and non-profit.",
 			"welcome.repo": "",
 			"welcome.ban1": "Do not use this project for unauthorized attacks, intrusion, data theft, sabotage, or any illegal activity.",
 			"welcome.ban2": "Do not commercially sell, resell, or profit from gray-market use, or redistribute for profit without the author.",
@@ -1146,7 +1146,7 @@ const productTheme = createProductTheme();
 			"envGate.lead": "Existing tools stay in use. Missing tools are skipped, so you can send right away.",
 			"envGate.kaliHint": "Kali uses local tools directly. Missing scanners do not block send; those skills stay unavailable.",
 			"envGate.skip": "Skip for now",
-			"envGate.skipConfirm": "You can keep chatting after this. Scan and exploit skills stay unavailable until the tools are installed. You can add paths later under dsh-purge-safe → Env adapt.",
+			"envGate.skipConfirm": "You can keep chatting after this. Scan and exploit skills stay unavailable until the tools are installed. You can add paths later under pi-purge → Env adapt.",
 			"envGate.skipNo": "Back",
 			"envGate.skipYes": "Continue without tools",
 			"envGate.go": "Open Env adapt",
@@ -1215,7 +1215,7 @@ const productTheme = createProductTheme();
 			"btn.revert": "Restore",
 			"btn.uninstall": "Uninstall",
 			"btn.uninstall.busy": "Uninstalling…",
-			"uninstall.title": "Uninstall dsh-purge-safe",
+			"uninstall.title": "Uninstall pi-purge",
 			"uninstall.body": "Uninstall? This restores the original Harness and removes this plugin completely.",
 			"uninstall.confirm": "Uninstall",
 			"uninstall.cancel": "Cancel",
@@ -1378,7 +1378,7 @@ const productTheme = createProductTheme();
 			"patch.24": "preset fetch on",
 			"patch.25": "Strip official default identity (keep feature prompts)",
 			"patch.26": "minimal: strip identity, open inject",
-			"patch.28": "dsh-liangshen: keep dsh-purge-safe / dshpg in phase-1",
+			"patch.28": "dsh-liangshen: keep pi-purge / pipg in phase-1",
 			"patch.70": "Minimal shell drops the no-network line",
 			"patch.71": "Liangshen drops the stock identity line",
 			"patch.29": "dsh-tool-web: untrusted framing → usable data",
@@ -3523,7 +3523,7 @@ body:not([data-ds-dark-theme]) .dshp-auth-ops button.primary{background:var(--ds
 			const [busy, setBusy] = useState(false);
 
 			useEffect(() => {
-				apiJson("/dsh-purge-safe/continue/settings")
+				apiJson("/pi-purge/continue/settings")
 					.then((d) => { if (d && d.ok) setCfg(d); })
 					.catch(() => {});
 			}, []);
@@ -3535,7 +3535,7 @@ body:not([data-ds-dark-theme]) .dshp-auth-ops button.primary{background:var(--ds
 				if (next.autoContinue && !(Number(next.continueMax) > 0)) next.continueMax = 3;
 				setCfg(next);
 				setBusy(true);
-				apiJson("/dsh-purge-safe/continue/settings", {
+				apiJson("/pi-purge/continue/settings", {
 					method: "POST",
 					headers: { "content-type": "application/json" },
 					body: JSON.stringify(next),
@@ -3708,7 +3708,7 @@ body:not([data-ds-dark-theme]) .dshp-auth-ops button.primary{background:var(--ds
 						loadAll({ quiet: true });
 					}, 700);
 				};
-				apiJson("/dsh-purge-safe/status")
+				apiJson("/pi-purge/status")
 					.then((d) => {
 						if (d && (d.applying === true || d.ready === false)) {
 							if (d.ok) {
@@ -3750,7 +3750,7 @@ body:not([data-ds-dark-theme]) .dshp-auth-ops button.primary{background:var(--ds
 						setNotice({ kind: "error", text: tr("err.status", { error: e.message }) });
 					});
 				if (quiet) return;
-				apiJson("/dsh-purge-safe/override")
+				apiJson("/pi-purge/override")
 					.then((d) => {
 						if (d && d.ok) {
 							const packed = typeof d.defaultContent === "string" ? d.defaultContent : "";
@@ -3769,7 +3769,7 @@ body:not([data-ds-dark-theme]) .dshp-auth-ops button.primary{background:var(--ds
 						if (holdNotice() || /timeout|cross-origin|连不上接口/i.test(String((e && e.message) || e || ""))) return;
 						setNotice({ kind: "error", text: tr("err.override", { error: e.message }) });
 					});
-				apiJson("/dsh-purge-safe/own-servers")
+				apiJson("/pi-purge/own-servers")
 					.then((d) => {
 						if (d && d.ok) {
 							setOwnServers(typeof d.content === "string" ? d.content : "");
@@ -3803,7 +3803,7 @@ body:not([data-ds-dark-theme]) .dshp-auth-ops button.primary{background:var(--ds
 					const surface = uiSurfaceOf() || hostSurfaceOf(state);
 					const payload = action === "apply" ? { content: applyContent } : {};
 					if (surface === "desktop") payload.surface = "desktop";
-					fetch("/dsh-purge-safe/" + action, withSurfaceHeaders({
+					fetch("/pi-purge/" + action, withSurfaceHeaders({
 						method: "POST",
 						headers: { "content-type": "application/json" },
 						body: JSON.stringify(payload),
@@ -3899,7 +3899,7 @@ body:not([data-ds-dark-theme]) .dshp-auth-ops button.primary{background:var(--ds
 					setAskRestart(false);
 					setNotice({ kind: "idle", text: "" });
 					const content = readPromptBox();
-					fetch("/dsh-purge-safe/override", {
+					fetch("/pi-purge/override", {
 						method: "POST",
 						headers: { "content-type": "application/json" },
 						body: JSON.stringify({ content: content }),
@@ -3944,7 +3944,7 @@ body:not([data-ds-dark-theme]) .dshp-auth-ops button.primary{background:var(--ds
 				setOverride(defaultOverride);
 				setPatchBusy(true);
 				setNotice({ kind: "idle", text: "" });
-				apiJson("/dsh-purge-safe/override", {
+				apiJson("/pi-purge/override", {
 					method: "POST",
 					headers: { "content-type": "application/json" },
 					body: JSON.stringify({ content: defaultOverride }),
@@ -4005,7 +4005,7 @@ body:not([data-ds-dark-theme]) .dshp-auth-ops button.primary{background:var(--ds
 				setAskRestart(false);
 				const tr = tRef.current;
 				setNotice({ kind: "ok", text: tr("uninstall.applying") });
-				apiJson("/dsh-purge-safe/uninstall", { method: "POST", headers: { "content-type": "application/json" }, body: "{}" })
+				apiJson("/pi-purge/uninstall", { method: "POST", headers: { "content-type": "application/json" }, body: "{}" })
 					.then((d) => {
 						if (!d || !d.ok) throw new Error((d && d.error) || "uninstall failed");
 						setNotice({ kind: "ok", text: (d && d.note) || hostText(tr, "uninstall.done", d.surface || hostSurfaceOf(state)) });
@@ -4158,7 +4158,7 @@ body:not([data-ds-dark-theme]) .dshp-auth-ops button.primary{background:var(--ds
 									tiny: true,
 									disabled: !ownLoaded,
 									onClick: () => {
-										fetch("/dsh-purge-safe/own-servers", {
+										fetch("/pi-purge/own-servers", {
 											method: "POST",
 											headers: { "content-type": "application/json" },
 											body: JSON.stringify({ content: ownServers }),
@@ -4587,7 +4587,7 @@ body:not([data-ds-dark-theme]) .dshp-auth-ops button.primary{background:var(--ds
 					if (d && d.ok) setSt({ ok: true, skills: d.skills || [] });
 					else fail({ message: (d && d.error) || "bad response" });
 				};
-				apiJson("/dsh-purge-safe/status")
+				apiJson("/pi-purge/status")
 					.then((d) => {
 						const allowed = skillUiAllowed(d);
 						setOnBeta(allowed);
@@ -4859,7 +4859,7 @@ body:not([data-ds-dark-theme]) .dshp-auth-ops button.primary{background:var(--ds
 			// 必须先看到旧进程掉线，再等新进程就绪；否则同进程立刻 200 会被当成「重启成功」又弹重启。
 			let sawDown = false;
 			const ping = () => {
-				fetch("/dsh-purge-safe/status", { cache: "no-store", credentials: "same-origin" })
+				fetch("/pi-purge/status", { cache: "no-store", credentials: "same-origin" })
 					.then((r) => (r.ok ? r.json() : Promise.reject()))
 					.then((d) => {
 						if (!sawDown) {
@@ -4913,7 +4913,7 @@ body:not([data-ds-dark-theme]) .dshp-auth-ops button.primary{background:var(--ds
 					setBusy(false);
 				}, 8000);
 			};
-			apiJson("/dsh-purge-safe/restart", {
+			apiJson("/pi-purge/restart", {
 				method: "POST",
 				headers: { "content-type": "application/json" },
 				body: JSON.stringify(surf ? { surface: surf } : {}),
@@ -5384,7 +5384,7 @@ body[data-ds-dark-theme] .dshp-rewind-item span{color:var(--dsw-alias-label-tert
 				clearStoredDraft(sessionId);
 				stopped = true;
 			};
-			apiJson("/dsh-purge-safe/last-user?sessionId=" + encodeURIComponent(sessionId)).then((data) => {
+			apiJson("/pi-purge/last-user?sessionId=" + encodeURIComponent(sessionId)).then((data) => {
 				if (stopped) return;
 				last = String(data?.text || "").trim();
 				if (!last || isPluginDraft(last)) return;
@@ -5451,7 +5451,7 @@ body[data-ds-dark-theme] .dshp-rewind-item span{color:var(--dsw-alias-label-tert
 		class RewindSafe extends Component {
 			constructor(p) { super(p); this.state = { failed: false }; }
 			static getDerivedStateFromError() { return { failed: true }; }
-			componentDidCatch(error) { try { console.error("[dsh-purge-safe] rewind slot:", error); } catch { /* ignore */ } }
+			componentDidCatch(error) { try { console.error("[pi-purge] rewind slot:", error); } catch { /* ignore */ } }
 			render() {
 				if (this.state.failed) return h(RewindFallback, this.props);
 				return h(RewindButton, this.props);
@@ -5461,7 +5461,7 @@ body[data-ds-dark-theme] .dshp-rewind-item span{color:var(--dsw-alias-label-tert
 		class ContinueSafe extends Component {
 			constructor(p) { super(p); this.state = { failed: false }; }
 			static getDerivedStateFromError() { return { failed: true }; }
-			componentDidCatch(error) { try { console.error("[dsh-purge-safe] continue slot:", error); } catch { /* ignore */ } }
+			componentDidCatch(error) { try { console.error("[pi-purge] continue slot:", error); } catch { /* ignore */ } }
 			render() {
 				if (this.state.failed) {
 					return h("button", {
@@ -5473,7 +5473,7 @@ body[data-ds-dark-theme] .dshp-rewind-item span{color:var(--dsw-alias-label-tert
 							const sessionId = currentSessionId(rewindSessions);
 							if (!sessionId) return;
 							try {
-								const data = await apiJson("/dsh-purge-safe/continue", {
+								const data = await apiJson("/pi-purge/continue", {
 									method: "POST",
 									headers: { "content-type": "application/json" },
 									body: JSON.stringify({ sessionId, force: true }),
@@ -5504,7 +5504,7 @@ body[data-ds-dark-theme] .dshp-rewind-item span{color:var(--dsw-alias-label-tert
 				}
 				let cancelled = false;
 				const tick = () => {
-					apiJson("/dsh-purge-safe/continue?sessionId=" + encodeURIComponent(sessionId))
+					apiJson("/pi-purge/continue?sessionId=" + encodeURIComponent(sessionId))
 						.then((data) => { if (!cancelled && data && data.ok) setInfo(data); })
 						.catch(() => {});
 				};
@@ -5523,7 +5523,7 @@ body[data-ds-dark-theme] .dshp-rewind-item span{color:var(--dsw-alias-label-tert
 				setBusy(true);
 				setNotice("");
 				try {
-					const data = await apiJson("/dsh-purge-safe/continue", {
+					const data = await apiJson("/pi-purge/continue", {
 						method: "POST",
 						headers: { "content-type": "application/json" },
 						body: JSON.stringify({ sessionId }),
@@ -5623,7 +5623,7 @@ body[data-ds-dark-theme] .dshp-rewind-item span{color:var(--dsw-alias-label-tert
 				const sessionId = this.props.sessionId || currentSessionId(rewindSessions);
 				if (!sessionId || this.state.busy) return;
 				this.setState({ busy: true, menu: false, notice: "" });
-				apiJson("/dsh-purge-safe/rewind", {
+				apiJson("/pi-purge/rewind", {
 					method: "POST",
 					headers: { "content-type": "application/json" },
 					body: JSON.stringify({ sessionId, mode }),
@@ -5709,7 +5709,7 @@ body[data-ds-dark-theme] .dshp-rewind-item span{color:var(--dsw-alias-label-tert
 				setMenu(false);
 				setNotice("");
 				try {
-					const data = await apiJson("/dsh-purge-safe/rewind", {
+					const data = await apiJson("/pi-purge/rewind", {
 						method: "POST",
 						headers: { "content-type": "application/json" },
 						body: JSON.stringify({ sessionId, mode }),
@@ -5785,7 +5785,7 @@ body[data-ds-dark-theme] .dshp-rewind-item span{color:var(--dsw-alias-label-tert
 			if (!sessions) return () => {};
 			const tick = async () => {
 				try {
-					const data = await apiJson("/dsh-purge-safe/rewind");
+					const data = await apiJson("/pi-purge/rewind");
 					if (!data || !data.sessionId || !data.at || data.at <= rewindSeenAt) return;
 					rewindSeenAt = data.at;
 					const current = currentSessionId(sessions);
@@ -5801,13 +5801,13 @@ body[data-ds-dark-theme] .dshp-rewind-item span{color:var(--dsw-alias-label-tert
 			return () => window.clearInterval(timer);
 		}
 
-		/* __DSH_PURGE_DRILL_BEGIN__ */
+		/* __PI_PURGE_DRILL_BEGIN__ */
 		// 内嵌演练台（源码在 lib/redteam，已并进本插件）
-		const __dshPurgeDrill = (() => {
+		const __piPurgeDrill = (() => {
 			var module = { exports: {} };
 			var exports = module.exports;
 
-/* __DSH_PURGE_FULLSCREEN_BEGIN__ */
+/* __PI_PURGE_FULLSCREEN_BEGIN__ */
 function resolveRuntimeDocument(options) {
   if (options && Object.prototype.hasOwnProperty.call(options, 'document')) {
     return options.document || null
@@ -6096,12 +6096,12 @@ function useWorkbenchFullscreen(React, elementRef, options = {}) {
 
   return { expanded, enter, exit, toggle, isExpanded }
 }
-/* __DSH_PURGE_FULLSCREEN_END__ */
+/* __PI_PURGE_FULLSCREEN_END__ */
     var module = { exports: {} }
     var exports = module.exports
     Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' })
 
-    /* __DSH_PURGE_THEME_BEGIN__ */
+    /* __PI_PURGE_THEME_BEGIN__ */
 /*
  * Shared product theme state.
  *
@@ -6110,8 +6110,8 @@ function useWorkbenchFullscreen(React, elementRef, options = {}) {
  * the settings shell can be rendered by host test doubles and in restricted
  * webviews where localStorage, MutationObserver, or matchMedia is unavailable.
  */
-const PRODUCT_THEME_KEY = "dsh-purge-safe-ui-theme";
-const PRODUCT_THEME_EVENT = "dsh-purge-safe-ui-theme-change";
+const PRODUCT_THEME_KEY = "pi-purge-ui-theme";
+const PRODUCT_THEME_EVENT = "pi-purge-ui-theme-change";
 const PRODUCT_THEME_MODES = Object.freeze(["dusk", "white", "system"]);
 const PRODUCT_THEME_DEFAULT = "system";
 
@@ -6355,7 +6355,7 @@ function createProductTheme(options = {}) {
 }
 
 const productTheme = createProductTheme();
-/* __DSH_PURGE_THEME_END__ */
+/* __PI_PURGE_THEME_END__ */
 
     const React = require('react')
     const rawH = React.createElement
@@ -16325,7 +16325,7 @@ const productTheme = createProductTheme();
                  单独加载时（没有外层壳）也必须能跑，不能硬引用外层函数。 */
               onClick: () => {
                 try {
-                  const go = window.__dshPurgeAttentionGo
+                  const go = window.__piPurgeAttentionGo
                   if (typeof go === 'function') { go(); return }
                 } catch { /* 外层没挂钩子就退回导航 */ }
                 onGo('agents')
@@ -21422,7 +21422,7 @@ const productTheme = createProductTheme();
         let alive = true
         const controller = new AbortController()
         const timer = window.setTimeout(() => controller.abort(), 6000)
-        fetch('/dsh-purge-safe/status', { method: 'GET', signal: controller.signal })
+        fetch('/pi-purge/status', { method: 'GET', signal: controller.signal })
           .then((response) => response.ok ? response.json() : null)
           .then((status) => {
             if (alive && status && status.ok === true && typeof status.plugin_version === 'string') {
@@ -21505,7 +21505,7 @@ const productTheme = createProductTheme();
     }
 
     function Panel(props) {
-      /* embedded：嵌在 dsh-purge-safe 外层 dock 里时，不再自带收起/全屏浏览/拖拽条，避免与外层按钮重叠 */
+      /* embedded：嵌在 pi-purge 外层 dock 里时，不再自带收起/全屏浏览/拖拽条，避免与外层按钮重叠 */
       const embedded = !!(props && props.embedded)
       const st = useUI()
       const [engagements, setEngagements] = React.useState([])
@@ -21955,7 +21955,7 @@ const productTheme = createProductTheme();
           h('div', { className: 'rt-nav', 'aria-label': '工作区导航' },
             embedded ? null : h('div', { className: 'rt-title' }, h('span', { className: 'rt-dot' }),
               full ? '演练台 · 全屏浏览' : '演练台'),
-            h('div', { className: 'rt-workspace-brand' }, h('span', { className: 'rt-workspace-mark', 'aria-hidden': 'true' }, 'P'), h('div', null, 'dsh-purge-safe', h('small', null, '协作工作台'))),
+            h('div', { className: 'rt-workspace-brand' }, h('span', { className: 'rt-workspace-mark', 'aria-hidden': 'true' }, 'P'), h('div', null, 'pi-purge', h('small', null, '协作工作台'))),
             h('span', { className: 'rt-nav-caption', 'aria-hidden': 'true' }, '项目空间'),
             h('div', { className: 'rt-nav-groups', role: 'tablist', 'aria-label': '功能区域', 'aria-orientation': compactNavigation ? 'horizontal' : 'vertical' }, TAB_GROUPS.flatMap((g, index) => [
               g.key === 'resources' ? h('span', { key: 'resource-caption', className: 'rt-nav-section-break', 'aria-hidden': 'true' }, '资源与配置') : null,
@@ -22060,15 +22060,15 @@ const productTheme = createProductTheme();
     exports.inject = inject
 			return applyDrillParts();
 		})();
-/* __DSH_PURGE_DRILL_END__ */
+/* __PI_PURGE_DRILL_END__ */
 
-		const AUTH_KEY = "dsh-purge-safe-drill-auth";
-		const WELCOME_KEY = "dsh-purge-safe-user-notice-v1";
+		const AUTH_KEY = "pi-purge-drill-auth";
+		const WELCOME_KEY = "pi-purge-user-notice-v1";
 		let drillGrantGen = 0;
 		let drillGrantPosting = 0;
 		let drillGrantState = { ready: false, granted: false };
 		let drillSyncRetryTimer = null;
-		const AUTH_LEGAL_HTML = "<h3>严正法律免责与合规使用声明</h3>\r\n    <p>本声明在进入演练台前必须全文阅读。本项目是非营利开源项目，遵守国家法律法规及所在平台的规范，仅供学习与研究、技术参考。严禁任何主体把本项目用于商业售卖、付费倒卖或黑灰产牟利。</p>\r\n    <p>开发者坚决反对并严禁任何形式的违法犯罪，绝不支持、不鼓励、不协助未授权网络攻击、漏洞利用、数据窃取、非法侵入计算机信息系统，或生成违法违禁内容。任何将本项目用于违法犯罪的行为，均与开发者无关，由行为人依法独立承担全部法律责任。不得以科研、教学、测试、演示或内部学习为由规避下列条款。</p>\r\n    <h3>1. 本仓库不含违法内容</h3>\r\n    <p>dsh-purge-safe 发布的代码、文档、补丁与默认提示词不是木马、后门、未授权渗透工具、勒索软件、撞库脚本，也不是针对公网或第三方系统的攻击载荷。项目不提供违法内容，也不教唆、组织、协助实施违法犯罪。</p>\r\n    <h3>2. 本机操作不构成对外授权</h3>\r\n    <p>应用补丁、写入、回滚、卸载，都在本机文件和本机进程内完成。这些操作不对任何公网主机或未授权系统进行扫描、探测、入侵或攻击发包，也不得把本机当作跳板。</p>\r\n    <p>插件若开启检测更新，仅可能访问本插件自己的 GitHub 仓库以核对版本。该访问与对第三方系统的网络攻击无关，不能被解释为对外渗透的授权。</p>\r\n    <h3>3. 允许使用的范围</h3>\r\n    <p>只允许用在你能证明有权处理的环境：本人有权管理的本机官方 Harness；离线的本地合成靶标；所有者已经出具合法书面授权的网络安全演练靶场；合规实验室里的受控环境。书面授权要能对应具体目标、时间和范围。只填写一个单位名称，或只有口头说法，不构成授权。</p>\r\n    <p>未经所有者合法书面授权的目标、公网在线系统、生产业务，以及能源、交通、水利、金融、公共服务、电子政务等关键信息基础设施，都不得作为演练对象。</p>\r\n    <h3>4. 必须遵守的法律，按条、款</h3>\r\n    <p>《中华人民共和国刑法》第二百八十五条第一款：禁止违反国家规定，侵入国家事务、国防建设、尖端科学技术领域的计算机信息系统。</p>\r\n    <p>同条第二款：禁止侵入前款规定以外的计算机信息系统，或者用其他技术手段，获取该系统中存储、处理或者传输的数据，或者对该系统实施非法控制。</p>\r\n    <p>同条第三款：禁止提供专门用于侵入、非法控制计算机信息系统的程序、工具；明知他人实施侵入、非法控制而为其提供程序、工具，同样禁止。</p>\r\n    <p>第二百八十六条第一款：禁止对计算机信息系统功能进行删除、修改、增加、干扰，造成系统不能正常运行。</p>\r\n    <p>同条第二款：禁止对系统中存储、处理或者传输的数据和应用程序进行删除、修改、增加。</p>\r\n    <p>同条第三款：禁止故意制作、传播计算机病毒等破坏性程序，影响计算机系统正常运行。</p>\r\n    <p>第二百八十七条：禁止利用计算机实施金融诈骗、盗窃、贪污、挪用公款、窃取国家秘密或者其他犯罪。</p>\r\n    <p>第二百八十七条之一第一款第（一）项：禁止设立用于实施诈骗、传授犯罪方法、制作或者销售违禁物品、管制物品等违法犯罪活动的网站、通讯群组。</p>\r\n    <p>同款第（二）项：禁止发布有关制作或者销售毒品、枪支、淫秽物品等违禁物品、管制物品或者其他违法犯罪的信息。</p>\r\n    <p>同款第（三）项：禁止为实施诈骗等违法犯罪活动发布信息。</p>\r\n    <p>第二百八十七条之二：禁止明知他人利用信息网络实施犯罪，仍为其提供技术支持，或者提供广告推广、支付结算等帮助。</p>\r\n    <p>第二百五十三条之一第一款、第三款：禁止向他人出售或者提供公民个人信息；禁止窃取或者以其他方法非法获取公民个人信息。</p>\r\n    <p>《中华人民共和国网络安全法》第十三条第二款：使用网络不得危害网络安全，不得利用网络从事危害国家安全、荣誉和利益，煽动颠覆国家政权、推翻社会主义制度，煽动分裂国家、破坏国家统一，宣扬恐怖主义、极端主义，宣扬民族仇恨、民族歧视，传播暴力、淫秽色情信息，编造、传播虚假信息扰乱经济秩序和社会秩序，以及侵害他人名誉、隐私、知识产权和其他合法权益等活动。</p>\r\n    <p>第十四条：禁止利用网络从事危害未成年人身心健康的活动。</p>\r\n    <p>第二十九条：禁止非法侵入他人网络、干扰他人网络正常功能、窃取网络数据；禁止提供专门用于侵入网络、干扰网络正常功能及防护措施、窃取网络数据的程序、工具；明知他人从事危害网络安全的活动，禁止为其提供技术支持、广告推广、支付结算等帮助。</p>\r\n    <p>第三十三条：公共通信和信息服务、能源、交通、水利、金融、公共服务、电子政务等关键信息基础设施实行重点保护。未获合法授权，不得侵入、干扰或破坏。</p>\r\n    <p>第四十六条：禁止窃取或者以其他非法方式获取个人信息，禁止非法出售或者非法向他人提供个人信息。</p>\r\n    <p>第四十八条：禁止设立用于实施诈骗，传授犯罪方法，制作或者销售违禁物品、管制物品等违法犯罪活动的网站、通讯群组；禁止利用网络发布涉及上述违法犯罪活动的信息。</p>\r\n    <p>第五十条：发送的电子信息、提供的应用软件不得设置恶意程序，不得含有法律、行政法规禁止发布或者传输的信息。</p>\r\n    <p>《中华人民共和国数据安全法》第八条：开展数据处理活动，不得危害国家安全、公共利益，不得损害个人、组织的合法权益。</p>\r\n    <p>第三十二条第一款：收集数据应当采取合法、正当的方式，不得窃取或者以其他非法方式获取数据。</p>\r\n    <p>同条第二款：法律、行政法规对收集、使用数据的目的和范围有规定的，只能在该目的和范围内收集、使用。</p>\r\n    <p>第五十一条：窃取或者以其他非法方式获取数据，或者因此损害个人、组织合法权益的，依照有关法律、行政法规处罚。</p>\r\n    <p>《中华人民共和国个人信息保护法》第五条：处理个人信息应当合法、正当、必要、诚信，不得通过误导、欺诈、胁迫等方式处理。</p>\r\n    <p>第六条第一款、第二款：处理个人信息应当具有明确、合理的目的，并与该目的直接相关，采取对个人权益影响最小的方式；收集限于实现处理目的的最小范围，不得过度收集。</p>\r\n    <p>第十条：禁止非法收集、使用、加工、传输他人个人信息，禁止非法买卖、提供或者公开他人个人信息；禁止从事危害国家安全、公共利益的个人信息处理活动。</p>\r\n    <p>第十三条：没有取得个人同意，也不属于订立履行合同所必需、履行法定职责、应对突发、公共利益新闻舆论、处理本人已经合法公开的信息，以及法律行政法规规定的其他情形之一的，不得处理个人信息。</p>\r\n    <p>第二十八条、第二十九条：生物识别、医疗健康、金融账户、行踪轨迹，以及不满十四周岁未成年人的个人信息，属于敏感个人信息。没有特定目的、充分必要性和严格保护措施，并且没有取得个人单独同意的，不得处理。</p>\r\n    <p>此外还须遵守其他现行有效的法律、行政法规、监管规定，以及所使用模型的服务条款与滥用政策。</p>\r\n    <h3>5. 据此禁止的方向</h3>\r\n    <p>未授权进入。禁止把没有书面授权的单位、域名、地址、公网系统、生产业务或关键信息基础设施登记为靶标，禁止对其扫描、探测、侵入、控制或发包。对应刑法第二百八十五条第一款、第二款，网络安全法第二十九条、第三十三条。</p>\r\n    <p>破坏与恶意程序。禁止删除、修改、增加、干扰他人系统功能或其中的数据、应用程序；禁止制作、传播病毒、勒索程序或其他破坏性程序；禁止在信息或软件中设置恶意程序。对应刑法第二百八十六条第一款至第三款，网络安全法第五十条。</p>\r\n    <p>工具与帮助。禁止把本项目或本机提供给他人，用于侵入、非法控制或窃取数据；禁止明知对方在实施网络犯罪，仍提供程序、工具、技术支持、广告推广或支付结算。对应刑法第二百八十五条第三款、第二百八十七条之二，网络安全法第二十九条。</p>\r\n    <p>数据。禁止窃取、非法收集、超范围使用、泄露、出售或向他人提供业务数据、账号、口令和其他受保护数据。对应数据安全法第八条、第三十二条、第五十一条。</p>\r\n    <p>个人信息。禁止非法收集、使用、加工、传输、买卖、提供或公开他人个人信息；禁止过度收集；禁止以误导、欺诈、胁迫方式处理；禁止擅自处理生物识别、医疗健康、金融账户、行踪轨迹和儿童个人信息。对应刑法第二百五十三条之一第一款、第三款，网络安全法第四十六条，个人信息保护法第五条、第六条、第十条、第十三条、第二十八条、第二十九条。</p>\r\n    <p>诈骗与违法信息。禁止设立或利用网站、群组实施诈骗、传授犯罪方法、制作或销售违禁物品、管制物品；禁止发布此类信息；禁止利用计算机实施诈骗、盗窃、贪污、挪用公款、窃取国家秘密。对应刑法第二百八十七条、第二百八十七条之一第一款第（一）项至第（三）项，网络安全法第四十八条。</p>\r\n    <p>内容。禁止生成或传播危害国家安全、荣誉和利益的内容，禁止煽动颠覆、分裂，禁止恐怖主义、极端主义、民族仇恨，禁止暴力、淫秽色情、赌博，禁止编造虚假信息扰乱经济秩序和社会秩序，禁止侵害名誉、隐私、知识产权，禁止危害未成年人身心健康的内容。对应网络安全法第十三条第二款、第十四条。</p>\r\n    <p>结果扩散。演练中形成的记录、资产信息和文件，只留在书面授权写明的目标和期限里，不得交给无权获知的人，也不得改作授权以外的用途。</p>\r\n    <h3>6. 责任由使用者承担</h3>\r\n    <p>本项目依据 MIT 协议按现状提供。开发者不就完整性、安全性与适用性作保证。使用者对自己的下载、部署、运行、修改、传播，以及全部输入与输出，承担独立、完全的民事、行政及刑事法律责任。作者与贡献者不承担因滥用产生的直接、间接或连带责任。</p>\r\n    <p>勾选确认的是操作者本人，不能代替没有阅读本声明的人，也不能把别人的系统说成已经授权。</p>\r\n    <h3>7. 违约即终止授权</h3>\r\n    <p>一旦用于非法攻击、恶意活动或上述任一禁止方向，使用许可自该行为发生之日起自动终止，且不可撤销。必须立即停止使用，并销毁本项目的代码、脚本与衍生数据，依法承担责任。授权终止后，演练台不得继续打开或继续使用。</p>\r\n    <h3>8. 与 DeepSeek 官方的关系</h3>\r\n    <p>本项目是独立的开源项目，与 DeepSeek 官方或其关联主体没有隶属、商业合作、授权或官方背书。文中的「官方」只表示评测对象是使用者本机安装的官方 DeepSeek Harness 软件包，不代表 DeepSeek 官方开发、认可或担保本插件。</p>\r\n    <p>文末。倒计时结束、滚到这里并勾选全部三项，才表示你以本人身份认可本声明，并完成本次演练台授权。</p>";
+		const AUTH_LEGAL_HTML = "<h3>严正法律免责与合规使用声明</h3>\r\n    <p>本声明在进入演练台前必须全文阅读。本项目是非营利开源项目，遵守国家法律法规及所在平台的规范，仅供学习与研究、技术参考。严禁任何主体把本项目用于商业售卖、付费倒卖或黑灰产牟利。</p>\r\n    <p>开发者坚决反对并严禁任何形式的违法犯罪，绝不支持、不鼓励、不协助未授权网络攻击、漏洞利用、数据窃取、非法侵入计算机信息系统，或生成违法违禁内容。任何将本项目用于违法犯罪的行为，均与开发者无关，由行为人依法独立承担全部法律责任。不得以科研、教学、测试、演示或内部学习为由规避下列条款。</p>\r\n    <h3>1. 本仓库不含违法内容</h3>\r\n    <p>pi-purge 发布的代码、文档、补丁与默认提示词不是木马、后门、未授权渗透工具、勒索软件、撞库脚本，也不是针对公网或第三方系统的攻击载荷。项目不提供违法内容，也不教唆、组织、协助实施违法犯罪。</p>\r\n    <h3>2. 本机操作不构成对外授权</h3>\r\n    <p>应用补丁、写入、回滚、卸载，都在本机文件和本机进程内完成。这些操作不对任何公网主机或未授权系统进行扫描、探测、入侵或攻击发包，也不得把本机当作跳板。</p>\r\n    <p>插件若开启检测更新，仅可能访问本插件自己的 GitHub 仓库以核对版本。该访问与对第三方系统的网络攻击无关，不能被解释为对外渗透的授权。</p>\r\n    <h3>3. 允许使用的范围</h3>\r\n    <p>只允许用在你能证明有权处理的环境：本人有权管理的本机官方 Harness；离线的本地合成靶标；所有者已经出具合法书面授权的网络安全演练靶场；合规实验室里的受控环境。书面授权要能对应具体目标、时间和范围。只填写一个单位名称，或只有口头说法，不构成授权。</p>\r\n    <p>未经所有者合法书面授权的目标、公网在线系统、生产业务，以及能源、交通、水利、金融、公共服务、电子政务等关键信息基础设施，都不得作为演练对象。</p>\r\n    <h3>4. 必须遵守的法律，按条、款</h3>\r\n    <p>《中华人民共和国刑法》第二百八十五条第一款：禁止违反国家规定，侵入国家事务、国防建设、尖端科学技术领域的计算机信息系统。</p>\r\n    <p>同条第二款：禁止侵入前款规定以外的计算机信息系统，或者用其他技术手段，获取该系统中存储、处理或者传输的数据，或者对该系统实施非法控制。</p>\r\n    <p>同条第三款：禁止提供专门用于侵入、非法控制计算机信息系统的程序、工具；明知他人实施侵入、非法控制而为其提供程序、工具，同样禁止。</p>\r\n    <p>第二百八十六条第一款：禁止对计算机信息系统功能进行删除、修改、增加、干扰，造成系统不能正常运行。</p>\r\n    <p>同条第二款：禁止对系统中存储、处理或者传输的数据和应用程序进行删除、修改、增加。</p>\r\n    <p>同条第三款：禁止故意制作、传播计算机病毒等破坏性程序，影响计算机系统正常运行。</p>\r\n    <p>第二百八十七条：禁止利用计算机实施金融诈骗、盗窃、贪污、挪用公款、窃取国家秘密或者其他犯罪。</p>\r\n    <p>第二百八十七条之一第一款第（一）项：禁止设立用于实施诈骗、传授犯罪方法、制作或者销售违禁物品、管制物品等违法犯罪活动的网站、通讯群组。</p>\r\n    <p>同款第（二）项：禁止发布有关制作或者销售毒品、枪支、淫秽物品等违禁物品、管制物品或者其他违法犯罪的信息。</p>\r\n    <p>同款第（三）项：禁止为实施诈骗等违法犯罪活动发布信息。</p>\r\n    <p>第二百八十七条之二：禁止明知他人利用信息网络实施犯罪，仍为其提供技术支持，或者提供广告推广、支付结算等帮助。</p>\r\n    <p>第二百五十三条之一第一款、第三款：禁止向他人出售或者提供公民个人信息；禁止窃取或者以其他方法非法获取公民个人信息。</p>\r\n    <p>《中华人民共和国网络安全法》第十三条第二款：使用网络不得危害网络安全，不得利用网络从事危害国家安全、荣誉和利益，煽动颠覆国家政权、推翻社会主义制度，煽动分裂国家、破坏国家统一，宣扬恐怖主义、极端主义，宣扬民族仇恨、民族歧视，传播暴力、淫秽色情信息，编造、传播虚假信息扰乱经济秩序和社会秩序，以及侵害他人名誉、隐私、知识产权和其他合法权益等活动。</p>\r\n    <p>第十四条：禁止利用网络从事危害未成年人身心健康的活动。</p>\r\n    <p>第二十九条：禁止非法侵入他人网络、干扰他人网络正常功能、窃取网络数据；禁止提供专门用于侵入网络、干扰网络正常功能及防护措施、窃取网络数据的程序、工具；明知他人从事危害网络安全的活动，禁止为其提供技术支持、广告推广、支付结算等帮助。</p>\r\n    <p>第三十三条：公共通信和信息服务、能源、交通、水利、金融、公共服务、电子政务等关键信息基础设施实行重点保护。未获合法授权，不得侵入、干扰或破坏。</p>\r\n    <p>第四十六条：禁止窃取或者以其他非法方式获取个人信息，禁止非法出售或者非法向他人提供个人信息。</p>\r\n    <p>第四十八条：禁止设立用于实施诈骗，传授犯罪方法，制作或者销售违禁物品、管制物品等违法犯罪活动的网站、通讯群组；禁止利用网络发布涉及上述违法犯罪活动的信息。</p>\r\n    <p>第五十条：发送的电子信息、提供的应用软件不得设置恶意程序，不得含有法律、行政法规禁止发布或者传输的信息。</p>\r\n    <p>《中华人民共和国数据安全法》第八条：开展数据处理活动，不得危害国家安全、公共利益，不得损害个人、组织的合法权益。</p>\r\n    <p>第三十二条第一款：收集数据应当采取合法、正当的方式，不得窃取或者以其他非法方式获取数据。</p>\r\n    <p>同条第二款：法律、行政法规对收集、使用数据的目的和范围有规定的，只能在该目的和范围内收集、使用。</p>\r\n    <p>第五十一条：窃取或者以其他非法方式获取数据，或者因此损害个人、组织合法权益的，依照有关法律、行政法规处罚。</p>\r\n    <p>《中华人民共和国个人信息保护法》第五条：处理个人信息应当合法、正当、必要、诚信，不得通过误导、欺诈、胁迫等方式处理。</p>\r\n    <p>第六条第一款、第二款：处理个人信息应当具有明确、合理的目的，并与该目的直接相关，采取对个人权益影响最小的方式；收集限于实现处理目的的最小范围，不得过度收集。</p>\r\n    <p>第十条：禁止非法收集、使用、加工、传输他人个人信息，禁止非法买卖、提供或者公开他人个人信息；禁止从事危害国家安全、公共利益的个人信息处理活动。</p>\r\n    <p>第十三条：没有取得个人同意，也不属于订立履行合同所必需、履行法定职责、应对突发、公共利益新闻舆论、处理本人已经合法公开的信息，以及法律行政法规规定的其他情形之一的，不得处理个人信息。</p>\r\n    <p>第二十八条、第二十九条：生物识别、医疗健康、金融账户、行踪轨迹，以及不满十四周岁未成年人的个人信息，属于敏感个人信息。没有特定目的、充分必要性和严格保护措施，并且没有取得个人单独同意的，不得处理。</p>\r\n    <p>此外还须遵守其他现行有效的法律、行政法规、监管规定，以及所使用模型的服务条款与滥用政策。</p>\r\n    <h3>5. 据此禁止的方向</h3>\r\n    <p>未授权进入。禁止把没有书面授权的单位、域名、地址、公网系统、生产业务或关键信息基础设施登记为靶标，禁止对其扫描、探测、侵入、控制或发包。对应刑法第二百八十五条第一款、第二款，网络安全法第二十九条、第三十三条。</p>\r\n    <p>破坏与恶意程序。禁止删除、修改、增加、干扰他人系统功能或其中的数据、应用程序；禁止制作、传播病毒、勒索程序或其他破坏性程序；禁止在信息或软件中设置恶意程序。对应刑法第二百八十六条第一款至第三款，网络安全法第五十条。</p>\r\n    <p>工具与帮助。禁止把本项目或本机提供给他人，用于侵入、非法控制或窃取数据；禁止明知对方在实施网络犯罪，仍提供程序、工具、技术支持、广告推广或支付结算。对应刑法第二百八十五条第三款、第二百八十七条之二，网络安全法第二十九条。</p>\r\n    <p>数据。禁止窃取、非法收集、超范围使用、泄露、出售或向他人提供业务数据、账号、口令和其他受保护数据。对应数据安全法第八条、第三十二条、第五十一条。</p>\r\n    <p>个人信息。禁止非法收集、使用、加工、传输、买卖、提供或公开他人个人信息；禁止过度收集；禁止以误导、欺诈、胁迫方式处理；禁止擅自处理生物识别、医疗健康、金融账户、行踪轨迹和儿童个人信息。对应刑法第二百五十三条之一第一款、第三款，网络安全法第四十六条，个人信息保护法第五条、第六条、第十条、第十三条、第二十八条、第二十九条。</p>\r\n    <p>诈骗与违法信息。禁止设立或利用网站、群组实施诈骗、传授犯罪方法、制作或销售违禁物品、管制物品；禁止发布此类信息；禁止利用计算机实施诈骗、盗窃、贪污、挪用公款、窃取国家秘密。对应刑法第二百八十七条、第二百八十七条之一第一款第（一）项至第（三）项，网络安全法第四十八条。</p>\r\n    <p>内容。禁止生成或传播危害国家安全、荣誉和利益的内容，禁止煽动颠覆、分裂，禁止恐怖主义、极端主义、民族仇恨，禁止暴力、淫秽色情、赌博，禁止编造虚假信息扰乱经济秩序和社会秩序，禁止侵害名誉、隐私、知识产权，禁止危害未成年人身心健康的内容。对应网络安全法第十三条第二款、第十四条。</p>\r\n    <p>结果扩散。演练中形成的记录、资产信息和文件，只留在书面授权写明的目标和期限里，不得交给无权获知的人，也不得改作授权以外的用途。</p>\r\n    <h3>6. 责任由使用者承担</h3>\r\n    <p>本项目依据 MIT 协议按现状提供。开发者不就完整性、安全性与适用性作保证。使用者对自己的下载、部署、运行、修改、传播，以及全部输入与输出，承担独立、完全的民事、行政及刑事法律责任。作者与贡献者不承担因滥用产生的直接、间接或连带责任。</p>\r\n    <p>勾选确认的是操作者本人，不能代替没有阅读本声明的人，也不能把别人的系统说成已经授权。</p>\r\n    <h3>7. 违约即终止授权</h3>\r\n    <p>一旦用于非法攻击、恶意活动或上述任一禁止方向，使用许可自该行为发生之日起自动终止，且不可撤销。必须立即停止使用，并销毁本项目的代码、脚本与衍生数据，依法承担责任。授权终止后，演练台不得继续打开或继续使用。</p>\r\n    <h3>8. 与 DeepSeek 官方的关系</h3>\r\n    <p>本项目是独立的开源项目，与 DeepSeek 官方或其关联主体没有隶属、商业合作、授权或官方背书。文中的「官方」只表示评测对象是使用者本机安装的官方 DeepSeek Harness 软件包，不代表 DeepSeek 官方开发、认可或担保本插件。</p>\r\n    <p>文末。倒计时结束、滚到这里并勾选全部三项，才表示你以本人身份认可本声明，并完成本次演练台授权。</p>";
 
 		function readWelcomeAck() {
 			try { return window.localStorage.getItem(WELCOME_KEY) === "1"; } catch { return false; }
@@ -22094,7 +22094,7 @@ const productTheme = createProductTheme();
 			setDrillAuthLocal(ok);
 			if (!ok) return;
 			drillGrantPosting += 1;
-			fetch("/dsh-purge-safe/drill-grant", {
+			fetch("/pi-purge/drill-grant", {
 				method: "POST",
 				headers: { "content-type": "application/json" },
 				body: "{}",
@@ -22109,7 +22109,7 @@ const productTheme = createProductTheme();
 			const gen = drillGrantGen;
 			/* 复位上一次调度的重试 timer,避免多次 writeDrillAuth 叠加链条 */
 			if (drillSyncRetryTimer) { try { clearTimeout(drillSyncRetryTimer); } catch { /* ignore */ } drillSyncRetryTimer = null; }
-			fetch("/dsh-purge-safe/drill-grant", { method: "GET" })
+			fetch("/pi-purge/drill-grant", { method: "GET" })
 				.then((r) => r.json())
 				.then((r) => {
 					if (gen !== drillGrantGen) return;
@@ -22223,14 +22223,14 @@ const productTheme = createProductTheme();
 			const pending = kind || "tab";
 			const openEnv = () => {
 				try {
-					if (__dshPurgeDrill && __dshPurgeDrill.setUI) {
-						__dshPurgeDrill.setUI({ open: true, tab: "env" });
+					if (__piPurgeDrill && __piPurgeDrill.setUI) {
+						__piPurgeDrill.setUI({ open: true, tab: "env" });
 					}
 				} catch { /* ignore */ }
 			};
 			if (readDrillAuth()) {
 				setDock({ open: true, tab: "drill", authOpen: false, pending: "tab" });
-				try { if (__dshPurgeDrill && __dshPurgeDrill.setUI) __dshPurgeDrill.setUI({ open: true }); } catch { /* ignore */ }
+				try { if (__piPurgeDrill && __piPurgeDrill.setUI) __piPurgeDrill.setUI({ open: true }); } catch { /* ignore */ }
 				if (pending === "env") openEnv();
 				if (pending === "full") {
 					requestDockFullscreen();
@@ -22254,7 +22254,7 @@ const productTheme = createProductTheme();
 		}
 		syncDrillGrant();
 
-		const DOCK_GEOM_KEY = "dsh-purge-safe-dock-geom-v4";
+		const DOCK_GEOM_KEY = "pi-purge-dock-geom-v4";
 		/* 默认停在右上，底边留在输入框上面。拖动之后停在用户松开的位置，只保证不拖出窗口。 */
 		const DOCK_COMPOSER_CLEAR = 172;
 		function defaultDockGeom() {
@@ -22421,9 +22421,9 @@ const productTheme = createProductTheme();
 								writeDrillAuth(true);
 								const kind = props.pending || "tab";
 								setDock({ authOpen: false, open: true, tab: "drill", pending: "tab" });
-								try { if (__dshPurgeDrill && __dshPurgeDrill.setUI) __dshPurgeDrill.setUI({ open: true }); } catch { /* ignore */ }
+								try { if (__piPurgeDrill && __piPurgeDrill.setUI) __piPurgeDrill.setUI({ open: true }); } catch { /* ignore */ }
 								if (kind === "env") {
-									try { if (__dshPurgeDrill && __dshPurgeDrill.setUI) __dshPurgeDrill.setUI({ open: true, tab: "env" }); } catch { /* ignore */ }
+									try { if (__piPurgeDrill && __piPurgeDrill.setUI) __piPurgeDrill.setUI({ open: true, tab: "env" }); } catch { /* ignore */ }
 								}
 								if (kind === "full") {
 						requestDockFullscreen();
@@ -22771,7 +22771,7 @@ const productTheme = createProductTheme();
 			useEffect(() => { if (!st.open && fullscreen.isExpanded()) fullscreen.exit(); }, [st.open]);
 			useEffect(() => {
 				const widthTag = document.createElement("style");
-				widthTag.setAttribute("data-dsh-purge-safe-dock-w", "1");
+				widthTag.setAttribute("data-pi-purge-dock-w", "1");
 				widthTag.textContent = ":root{--dshp-dock-w:" + geom.w + "px;--dshp-dock-h:" + geom.h + "px}";
 				document.head.append(widthTag);
 				return () => { widthTag.remove(); };
@@ -22788,7 +22788,7 @@ const productTheme = createProductTheme();
 			}, []);
 			useEffect(() => {
 				saveDockGeom(geom);
-				const tag = document.querySelector('style[data-dsh-purge-safe-dock-w="1"]');
+				const tag = document.querySelector('style[data-pi-purge-dock-w="1"]');
 				if (tag) tag.textContent = ":root{--dshp-dock-w:" + geom.w + "px;--dshp-dock-h:" + geom.h + "px}";
 			}, [geom]);
 			useEffect(() => {
@@ -22797,8 +22797,8 @@ const productTheme = createProductTheme();
 				return () => window.removeEventListener("resize", onResize);
 			}, []);
 			useEffect(() => {
-				if (st.tab === "drill" && readDrillAuth() && __dshPurgeDrill && __dshPurgeDrill.setUI) {
-					try { __dshPurgeDrill.setUI({ open: true }); } catch { /* ignore */ }
+				if (st.tab === "drill" && readDrillAuth() && __piPurgeDrill && __piPurgeDrill.setUI) {
+					try { __piPurgeDrill.setUI({ open: true }); } catch { /* ignore */ }
 				}
 			}, [st.tab, st.open]);
 			const onTab = (id) => {
@@ -22885,8 +22885,8 @@ const productTheme = createProductTheme();
 			};
 			const body = st.tab === "clean"
 				? h(SettingsRoot, { t })
-				: (readDrillAuth() && __dshPurgeDrill.Panel
-					? h(__dshPurgeDrill.Panel, { embedded: true, sessionId: currentSid || null, sessionTitle: currentTitle || "" })
+				: (readDrillAuth() && __piPurgeDrill.Panel
+					? h(__piPurgeDrill.Panel, { embedded: true, sessionId: currentSid || null, sessionTitle: currentTitle || "" })
 					: h("div", { style: { padding: 16, color: "var(--ui-muted)" } }, t("dock.unauthorized")));
 			const panel = h("div", {
 				className: "dshp-dock dshp-studio-dock",
@@ -22904,12 +22904,12 @@ const productTheme = createProductTheme();
 					height: geom.h + "px",
 				},
 			},
-				h("style", { "data-dsh-purge-safe-ui": "1" }, PURGE_CSS),
-				__dshPurgeDrill && __dshPurgeDrill.CSS
-					? h("style", { "data-dsh-purge-safe-drill": "1" }, __dshPurgeDrill.CSS)
+				h("style", { "data-pi-purge-ui": "1" }, PURGE_CSS),
+				__piPurgeDrill && __piPurgeDrill.CSS
+					? h("style", { "data-pi-purge-drill": "1" }, __piPurgeDrill.CSS)
 					: null,
 				h("div", { className: "dshp-dock-head", onMouseDown: startDrag, title: "按住拖动面板" },
-					h("b", null, "dsh-purge-safe"),
+					h("b", null, "pi-purge"),
 					h("div", { className: "dshp-dock-modes", role: "tablist" },
 						h("button", {
 							type: "button",
@@ -23069,7 +23069,7 @@ const productTheme = createProductTheme();
 				let timer = 0;
 				const hero = kind === "hero";
 				const className = hero ? "dshp-hero-chip" : "dshp-tab-chip";
-				const testId = hero ? "dsh-purge-safe-hero-chip" : "dsh-purge-safe-tab-chip";
+				const testId = hero ? "pi-purge-hero-chip" : "pi-purge-tab-chip";
 				const ensure = () => {
 					if (dead || typeof document === "undefined") return;
 					let el = document.querySelector("." + className);
@@ -23169,7 +23169,7 @@ const productTheme = createProductTheme();
 		function openAttention() {
 			requestDrill("tab");
 			try {
-				if (__dshPurgeDrill && __dshPurgeDrill.setUI) __dshPurgeDrill.setUI({ open: true, tab: "overview" });
+				if (__piPurgeDrill && __piPurgeDrill.setUI) __piPurgeDrill.setUI({ open: true, tab: "overview" });
 			} catch { /* ignore */ }
 		}
 
@@ -23251,7 +23251,7 @@ const productTheme = createProductTheme();
 
 		/* 演练台面板里的「填入主会话输入框」按钮走这个钩子 —— 两边是不同的 bundle，
 		   面板在独立加载时拿不到外层函数，只能通过 window 桥。 */
-		try { window.__dshPurgeAttentionGo = handleAttention; } catch { /* 无 window 环境 */ }
+		try { window.__piPurgeAttentionGo = handleAttention; } catch { /* 无 window 环境 */ }
 
 		/**
 		 * 悬浮提醒：默认收成一枚小胶囊（只有警示点和数字），悬停或键盘聚焦才展开成卡片。
@@ -23265,7 +23265,7 @@ const productTheme = createProductTheme();
 		 * 而人在忙的时候点一下，忙完就再也想不起来 —— 这是设计错误，不是用户忘性。
 		 * 现在是 10 分钟后回来，卡住的 3 分钟就回来。想立刻再看就点侧栏/面板。
 		 */
-		const ATTENTION_POS_KEY = "dsh-purge-safe:attention-pos";
+		const ATTENTION_POS_KEY = "pi-purge:attention-pos";
 		const SNOOZE_MS = 10 * 60 * 1000;
 		const SNOOZE_URGENT_MS = 3 * 60 * 1000;
 
@@ -23502,7 +23502,7 @@ const productTheme = createProductTheme();
 			rewindConversation = ctx.conversation || null;
 			ctx.slots.inject("conversation.input.right", () => ctx.slots.register({
 				name: "conversation.input.right",
-				id: "dsh-purge-safe-rewind",
+				id: "pi-purge-rewind",
 				order: 20,
 				inject: (sessionId) => ({
 					sessionId,
@@ -23511,23 +23511,23 @@ const productTheme = createProductTheme();
 			}, RewindSafe));
 			// ctx.slots.inject("conversation.input.right", () => ctx.slots.register({
 			// 	name: "conversation.input.right",
-			// 	id: "dsh-purge-safe-continue",
+			// 	id: "pi-purge-continue",
 			// 	order: 21,
 			// 	inject: (sessionId) => ({
 			// 		sessionId,
 			// 		t: ctx.locale.bind(NS),
 			// 	}),
 			// }, ContinueSafe));
-			ctx.effect(() => installRewindWatch(ctx), "dsh-purge-safe: rewind watch");
+			ctx.effect(() => installRewindWatch(ctx), "pi-purge: rewind watch");
 		}
 
 		function apply(ctx) {
-			ctx.effect(() => ctx.locale.register(NS, { zh, en }), "dsh-purge-safe: dictionaries");
+			ctx.effect(() => ctx.locale.register(NS, { zh, en }), "pi-purge: dictionaries");
 			const t = ctx.locale.bind(NS);
 			translate = t;
 			ctx.slots.inject("shell.overlay", () => ctx.slots.register({
 				name: "shell.overlay",
-				id: "dsh-purge-safe-dock",
+				id: "pi-purge-dock",
 				order: 50,
 			}, () => h(react.Fragment, null, h(WelcomeNotice), h(PurgeDock), h(HeroNewSessionMount), h(TabRowPurgeMount), h(EnvAdaptSendGate), h(AttentionToast))));
 			/* 侧栏角标已退役：胶囊本身就在画布上、还能拖到任意位置，
@@ -23544,7 +23544,7 @@ const productTheme = createProductTheme();
 						ctx.inject(["sessions", "uiWorkspace", "conversation"], (host) => installRewindUi(host));
 					}
 				} catch (e2) {
-					try { console.warn("[dsh-purge-safe] rewind ui skipped:", e2 || e); } catch { /* ignore */ }
+					try { console.warn("[pi-purge] rewind ui skipped:", e2 || e); } catch { /* ignore */ }
 				}
 			}
 		}

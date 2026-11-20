@@ -1,7 +1,16 @@
 {
-  "name": "dsh-purge-safe",
+  "name": "pi-purge",
   "version": "2.0.0",
-  "description": "DeepSeek Harness 破甲：让所有模型都能破甲，不同模型可换不同提示词；默认提示词面向国模「鸢码」。满血版本 + Super Agent 适配，面向 DSH 0.2.2-rc.3；优化提示词，降低拒绝率，提升稳定性。",
+  "description": "pi-purge：从 dsh-purge-safe 二开而来的 DeepSeek Harness 破甲与红队评测插件。让所有模型都能破甲，不同模型可换不同提示词；默认提示词面向国模「鸢码」。满血版本 + Super Agent 适配，面向 DSH 0.2.2-rc.3；优化提示词，降低拒绝率，提升稳定性。",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhuguang-ZFG/pi-purge.git"
+  },
+  "homepage": "https://github.com/zhuguang-ZFG/pi-purge#readme",
+  "bugs": {
+    "url": "https://github.com/zhuguang-ZFG/pi-purge/issues"
+  },
+  "author": "zhuguang-ZFG (derived from CallMeGuLab/dsh-purge-safe)",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -16,7 +25,7 @@
     "./package.json": "./package.json"
   },
   "bin": {
-    "dsh-purge-safe": "bin/dsh-purge-safe.js"
+    "pi-purge": "bin/pi-purge.js"
   },
   "files": [
     "lib",

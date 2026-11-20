@@ -24,8 +24,8 @@
 ### 0.2 两条安装路径（拷贝，不是软链）
 
 ```
-$DSH_HOME/plugins/dsh-purge-safe
-$DSH_HOME/profiles/desktop/node_modules/dsh-purge-safe
+$DSH_HOME/plugins/pi-purge
+$DSH_HOME/profiles/desktop/node_modules/pi-purge
 ```
 
 改仓库文件后**必须**同步这两处，否则用户看到的是旧代码。`regress.mjs` 的第 [2] 项会逐字节比对。
@@ -34,7 +34,7 @@ $DSH_HOME/profiles/desktop/node_modules/dsh-purge-safe
 
 浏览器加载的是**根目录 `client.js`**。`lib/redteam/client.js` 是它的源，
 由 `scripts/build-client.mjs` 把源抽成片段塞进 `client.js` 的
-`/* __DSH_PURGE_DRILL_BEGIN__ */` … `/* __DSH_PURGE_DRILL_END__ */` 之间。
+`/* __PI_PURGE_DRILL_BEGIN__ */` … `/* __PI_PURGE_DRILL_END__ */` 之间。
 
 - 改 `lib/redteam/client.js` → **必须**跑 build。
 - 改 `client.js` 里 drill 块**外面**的部分（例如 `AttentionToast`、`handleAttention`）→
@@ -46,7 +46,7 @@ $DSH_HOME/profiles/desktop/node_modules/dsh-purge-safe
 
 ```bash
 node -e "const fs=require('fs');const a=fs.readFileSync('client.js','utf8');
-const b=a.indexOf('/* __DSH_PURGE_DRILL_BEGIN__ */'),e=a.indexOf('/* __DSH_PURGE_DRILL_END__ */');
+const b=a.indexOf('/* __PI_PURGE_DRILL_BEGIN__ */'),e=a.indexOf('/* __PI_PURGE_DRILL_END__ */');
 const i=a.indexOf('function handleAttention');console.log(i>b&&i<e?'inside drill':'outside drill')"
 ```
 
@@ -213,15 +213,15 @@ for (const [input, want] of cases) {
 ```js
 export function makeContinueMessage(text) {
   return {
-    id: `dsh-purge-safe-continue-${randomUUID()}`,
+    id: `pi-purge-continue-${randomUUID()}`,
     role: "user",
     content: [{ type: "text", text: body }],
-    source: { kind: "dsh-purge-safe", form: "notice", summary: "continue" },
+    source: { kind: "pi-purge", form: "notice", summary: "continue" },
   };
 }
 ```
 
-`hasFreshHumanTurn`（`:246`）据此过滤：`source.kind === "plugin"` 或 `"dsh-purge-safe"` 不算真人。
+`hasFreshHumanTurn`（`:246`）据此过滤：`source.kind === "plugin"` 或 `"pi-purge"` 不算真人。
 
 - **错误范例（本次已移除）**：`client.js` 旧 `submitAttentionPrompt` 调 `input.submit('queue')`。
   这条消息在会话日志里是 `source: { kind: "user", rpcId: ... }`，与真人输入**无法区分**。
@@ -739,7 +739,7 @@ node scripts/build-client.mjs
 
 # 3) 同步两份安装拷贝（按需扩展文件清单）
 DSH="D:/DeepSeek Harness/.dsh"
-for d in "$DSH/plugins/dsh-purge-safe" "$DSH/profiles/desktop/node_modules/dsh-purge-safe"; do
+for d in "$DSH/plugins/pi-purge" "$DSH/profiles/desktop/node_modules/pi-purge"; do
   for f in client.js lib/redteam/client.js lib/redteam/store-core.js lib/redteam/tools.js lib/redteam/schema.js; do
     cp "$f" "$d/$f"
   done

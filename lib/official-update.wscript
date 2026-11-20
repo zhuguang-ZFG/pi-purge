@@ -30,8 +30,8 @@ var appDir = resources + '\\app';
 var movedApp = false;
 var prev = '';
 if (fso.FolderExists(appDir)) {
-  prev = appDir + '.dshpurge-prev';
-  if (fso.FolderExists(prev)) prev = appDir + '.dshpurge-prev-' + (new Date().getTime());
+  prev = appDir + '.pipurge-prev';
+  if (fso.FolderExists(prev)) prev = appDir + '.pipurge-prev-' + (new Date().getTime());
   for (var n = 0; n < 40; n++) {
     try { fso.MoveFolder(appDir, prev); movedApp = true; log('moved-app'); break; }
     catch (moveErr) { log('move-app ' + (moveErr && moveErr.message ? moveErr.message : moveErr)); WScript.Sleep(250); }
@@ -82,7 +82,7 @@ if (!ok) {
 } else {
   if (!movedApp && fso.FolderExists(appDir)) log('move-app-failed');
   try {
-    var marker = fso.CreateTextFile(resources + '\\dsh-purge-safe-reapply-asar', true);
+    var marker = fso.CreateTextFile(resources + '\\pi-purge-reapply-asar', true);
     marker.WriteLine('1');
     marker.Close();
     log('marker');

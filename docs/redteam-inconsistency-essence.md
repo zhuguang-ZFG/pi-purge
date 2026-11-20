@@ -3,7 +3,7 @@
 对照双方：
 
 - 上游：`dsh-redteam-mode` tag **v0.14.3**（`COMMIT_REMOVED`），实现以 `packages/redteam-bundle/` 为准。
-- 插件：`dsh-purge-safe` **1.1.75**，红队在 `lib/redteam/`、`presets/redteam/`、`skills/redteam/`。浏览器真正加载的是根目录 `client.js` 嵌入块。
+- 插件：`pi-purge` **1.1.75**，红队在 `lib/redteam/`、`presets/redteam/`、`skills/redteam/`。浏览器真正加载的是根目录 `client.js` 嵌入块。
 
 这份文档只写**还不一致**的部分。已经对齐的（态势页、五分区、会话跟随、模板化报告骨架、标题栏、全面浏览）不展开。  
 搬入时拍过板的决策见 `docs/redteam-port-plan-1-3-4-5-6.md`；这里写的是那些决策落在运行时上的**真实后果**。
@@ -456,7 +456,7 @@ assess 稿却写：用 `sort=todo` 取未评估，直到 `sort=todo` 查不到�
 
 | | 上游 | 插件 |
 | --- | --- | --- |
-| 查版本 | npm `dsh-redteam-mode` | GitHub `CallMeGuLab/dsh-purge-safe`（npm 没有这个包） |
+| 查版本 | npm `dsh-redteam-mode` | GitHub `CallMeGuLab/pi-purge`（npm 没有这个包） |
 | 装完重启 | `dsh web` | 当前宿主（官方 exe / 社区版 / `dsh web`） |
 
 内网机没有 GitHub 时，插件的「检查更新」会失败，只显示当前版本。这是预期，不是红队功能坏了。
@@ -465,7 +465,7 @@ assess 稿却写：用 `sort=todo` 取未评估，直到 `sort=todo` 查不到�
 
 两边都写 `$DSH_HOME/redteam`（事实库、`settings.json`、`sessions.json`、`engagements/`）。  
 并装 `dsh-redteam-mode` 会抢同一份库和预设（**决策 9**）。  
-内网适配只带 `dsh-purge-safe` 的 tgz，见 `docs/redteam-offline-adapt.md`。
+内网适配只带 `pi-purge` 的 tgz，见 `docs/redteam-offline-adapt.md`。
 
 ---
 
@@ -489,7 +489,7 @@ assess 稿却写：用 `sort=todo` 取未评估，直到 `sort=todo` 查不到�
 | 低 | 4 宿主 | 右侧栏 vs 浮窗 | overlay | 嵌在清洗面板 | 改壳，与打法无关 |
 | 低 | 4 技能包 | 攻击链技能在不在包里 | bundle 18 | 随包 27 | 决策 7，内网机应保持插件 |
 | 低 | 4 适配 | Windows 填工具路径 | 无 | `EnvTab` | 决策 8，应留下 |
-| 低 | 4 更新 | 一键更新打哪个包 | npm 红队包 | GitHub dsh-purge-safe | 保持插件通道 |
+| 低 | 4 更新 | 一键更新打哪个包 | npm 红队包 | GitHub pi-purge | 保持插件通道 |
 
 ---
 

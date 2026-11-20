@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="docs/banner.svg" alt="dsh-purge-safe" width="720">
+  <img src="docs/banner.svg" alt="pi-purge" width="720">
 </p>
 
-<h1 align="center">⚔️ DeepSeek Harness 网络安全红队工具（dsh-purge-safe）</h1>
+<h1 align="center">⚔️ DeepSeek Harness 网络安全红队工具（pi-purge）</h1>
 
 <p align="center"><strong>Version 2.0.0</strong></p>
 
@@ -56,39 +56,39 @@
 
 ## 介绍
 
-**dsh-purge-safe** 是装在本机官方 [DeepSeek Harness](https://www.deepseek.com/harness/) 上的网络安全红队评测插件。本次为**满血版本 + Super Agent 适配**，面向 **DSH 0.2.2-rc.3**，新增 **Super Agent**，优化提示词、降低拒绝率并提升稳定性。支持官方 **Web**（`dsh web`）和官方**桌面端**（EXE），两边分开安装、分开应用。
+**pi-purge** 是装在本机官方 [DeepSeek Harness](https://www.deepseek.com/harness/) 上的网络安全红队评测插件。本次为**满血版本 + Super Agent 适配**，面向 **DSH 0.2.2-rc.3**，新增 **Super Agent**，优化提示词、降低拒绝率并提升稳定性。支持官方 **Web**（`dsh web`）和官方**桌面端**（EXE），两边分开安装、分开应用。
 
 Harness 不只是把问题交给模型。它还会在运行时改提示词、审批门、沙箱和会话格式。只看「模型答不答」，会把宿主拦截误当成模型拒绝。这个插件在你自己的安装里把这两层分开，用来做受控评测，也用来看默认策略该不该收紧。
 
 
 | 你会用到             | 它做什么                                            |
 | ---------------- | ----------------------------------------------- |
-| **dsh-purge-safe 侧栏** | 会话标题旁的按钮打开右侧栏。里面两页：清洗、演练台                       |
+| **pi-purge 侧栏** | 会话标题旁的按钮打开右侧栏。里面两页：清洗、演练台                       |
 | **清洗**           | 分组查看补丁，应用、还原、卸载；编辑提示词和多套规则                      |
 | **演练台**          | 正式版内置。授权后查看资产和本机环境。技能库与知识库随包提供。 |
 | **宿主策略**         | 调整默认文案、权限策略和工具上限。官方能力保留，不另写一套身份                 |
 | **启动时** | 本地版默认关闭自动应用；在「清洗」中点击「应用」，按需配置启动时重新应用。 |
 
 
-不写死盘符。按 `$DSH_HOME`、dsh 启动器旁边的 `.dsh`，再退回 `~/.dsh`。不改 Harness 源码仓库，在 **dsh-purge-safe** 的「清洗」里点「应用」才写入。身份来自插件里的加密提示词，也就是提示词框默认显示的那一份。不读取宿主磁盘上的提示词文件。
+不写死盘符。按 `$DSH_HOME`、dsh 启动器旁边的 `.dsh`，再退回 `~/.dsh`。不改 Harness 源码仓库，在 **pi-purge** 的「清洗」里点「应用」才写入。身份来自插件里的加密提示词，也就是提示词框默认显示的那一份。不读取宿主磁盘上的提示词文件。
 
 本插件只处理使用者本机已安装的官方 `@deepseek-ai` 包和本机配置。它不是公网扫描器，也不是针对第三方站点的攻击套件。仓库内不含木马、未授权渗透脚本或对外攻击载荷。
 
 ---
 
-## 📌 原版禁止倒卖。二开必须署名。
+## 📌 本项目为二开作品。原版禁止倒卖，上游必须署名。
 
-## 署名要求
+## 来源与署名
 
-**原版禁止倒卖。** 不得付费转售、换皮上架，或以商品形式分销。
+**本项目 pi-purge 是 [dsh-purge-safe](https://github.com/CallMeGuLab/dsh-purge-safe)（作者 CallMeGuLab）的二开版本**，由 zhuguang-ZFG 重命名、重打包并维护。上游代码、提示词与技能库的全部著作权归原作者所有，本项目仅按 Apache-2.0 保留署名后再分发。
 
-**二开必须署名**，并写明来源仓库：[dsh-purge-safe / CallMeGuLab](./NOTICE)。借用本项目的名称、思路、代码或提示词，同样必须署名。
+上游的署名要求同样适用于本项目的下游：**再次二开必须署名**，并写明来源仓库 [pi-purge / zhuguang-ZFG](https://github.com/zhuguang-ZFG/pi-purge) 与上游 [dsh-purge-safe / CallMeGuLab](https://github.com/CallMeGuLab/dsh-purge-safe)。
 
-不署名、隐瞒来源、改头换面据为己有，或把原版拿去倒卖，维护团队将依法追究责任。
+**禁止倒卖。** 不得付费转售、换皮上架，或以商品形式分销本项目或上游原版。
 
 ## 许可证
 
-本仓库使用 [Apache License 2.0](./LICENSE)。二开、再分发必须保留版权声明和 [NOTICE](./NOTICE)，写明来源 [dsh-purge-safe / CallMeGuLab](./NOTICE)。原版禁止倒卖。
+本仓库使用 [Apache License 2.0](./LICENSE)。二开、再分发必须保留版权声明和 [NOTICE](./NOTICE)，写明来源 [pi-purge / zhuguang-ZFG](https://github.com/zhuguang-ZFG/pi-purge) 与上游 [dsh-purge-safe / CallMeGuLab](https://github.com/CallMeGuLab/dsh-purge-safe)。
 
 ---
 
@@ -104,7 +104,7 @@ Harness 不只是把问题交给模型。它还会在运行时改提示词、审
 
 **【零容忍严正申明】**：本项目坚决反对并严禁任何形式的违法犯罪行为！本维护团队绝不支持、不鼓励、不协助任何未授权网络攻击、漏洞利用、数据窃取、非法侵入计算机信息系统或生成违法违禁内容的活动。**任何将本项目用于违法犯罪的行为，均与本维护团队无关，由行为人依法独立承担全部法律责任。**
 
-1. **本仓库不含违法内容**：`dsh-purge-safe` 发布的代码、文档、补丁与默认提示词**不是**木马、后门、未授权渗透工具、勒索软件、撞库脚本，也**不是**针对公网或第三方系统的攻击载荷。项目本身不提供违法内容，也不教唆、组织、协助实施违法犯罪。
+1. **本仓库不含违法内容**：`pi-purge` 发布的代码、文档、补丁与默认提示词**不是**木马、后门、未授权渗透工具、勒索软件、撞库脚本，也**不是**针对公网或第三方系统的攻击载荷。项目本身不提供违法内容，也不教唆、组织、协助实施违法犯罪。
 2. **只作用于本机官方 Harness**：安全评测补丁、提示词注入全部发生在使用者**本机已安装的官方 DeepSeek Harness**（`@deepseek-ai` 包、本机 profile / `$DSH_HOME`）上。对象是使用者自己的官方本地软件，**不是**他人的网站、服务器、账号或信息系统。
 3. **评测补丁不对外网目标联网**：应用补丁、写入注入、回滚、卸载均在本机文件与本机进程内完成，**不对任何公网主机、未授权系统进行扫描、探测、入侵或攻击发包**。不得把本项目当作跳板去打外网。当前本地固定版本已关闭在线更新，也不能被解释为授权对外渗透。
 4. **合法受控范围限定**：本项目定位为使用者在**自己有权管理的本机官方 Harness**上，进行红队科研与鲁棒性评测的辅助工具。**严禁在未经所有者合法书面授权的目标、公网在线系统或生产业务上运行本项目**。一切测试必须限制在**本机已授权安装的官方 Harness、离线本地合成靶标、授权网络安全演练靶场及合规实验室受控环境**中进行。
@@ -139,26 +139,26 @@ Harness 不只是把问题交给模型。它还会在运行时改提示词、审
 
 ## 安装
 
-将当前压缩包解压到名为 `dsh-purge-safe` 的本地目录，只安装到你实际使用的宿主。
+将当前压缩包解压到名为 `pi-purge` 的本地目录，只安装到你实际使用的宿主。
 
 ```sh
 # 官方 dsh web：将路径换成实际解压目录
-dsh plugin --profile web add /absolute/path/to/dsh-purge-safe
+dsh plugin --profile web add /absolute/path/to/pi-purge
 
 # 官方桌面 EXE
-dsh plugin --profile desktop add /absolute/path/to/dsh-purge-safe
+dsh plugin --profile desktop add /absolute/path/to/pi-purge
 ```
 
-完全退出并重新打开对应宿主，点击会话标题旁的 **dsh-purge-safe → 清洗 → 应用**。应用成功后自动重启一次；在聊天中执行 `/purge status`，确认宿主目录和补丁状态。
+完全退出并重新打开对应宿主，点击会话标题旁的 **pi-purge → 清洗 → 应用**。应用成功后自动重启一次；在聊天中执行 `/purge status`，确认宿主目录和补丁状态。
 
 <a id="manual"></a>
 
 ### 手动安装
 
 1. 找到实际使用的 `$DSH_HOME`，其中应包含 `profiles/web` 或 `profiles/desktop`。
-2. 将解压后的插件放到 `$DSH_HOME/plugins/dsh-purge-safe`。
-3. 只在对应 profile 的 `package.json` 中追加：`dependencies` 增加 `"dsh-purge-safe": "file:../../plugins/dsh-purge-safe"`，`dsh.profile.bundles` 增加 `"dsh-purge-safe"`。保留原有配置。
-4. 进入该 profile 目录执行 `pnpm install`，确认 `node_modules/dsh-purge-safe/package.json` 存在。
+2. 将解压后的插件放到 `$DSH_HOME/plugins/pi-purge`。
+3. 只在对应 profile 的 `package.json` 中追加：`dependencies` 增加 `"pi-purge": "file:../../plugins/pi-purge"`，`dsh.profile.bundles` 增加 `"pi-purge"`。保留原有配置。
+4. 进入该 profile 目录执行 `pnpm install`，确认 `node_modules/pi-purge/package.json` 存在。
 5. 完全退出并重新打开宿主，再点击「清洗 → 应用」。
 
 卸载时使用「清洗 → 卸载」或 `/purge uninstall`。当前压缩包使用本地安装，不包含远程仓库安装地址。
@@ -177,11 +177,11 @@ dsh plugin --profile desktop add /absolute/path/to/dsh-purge-safe
 
 ```sh
 # CLI
-dsh-purge-safe --status
-dsh-purge-safe --apply
-dsh-purge-safe --revert
-dsh-purge-safe --uninstall
-dsh-purge-safe --edit
+pi-purge --status
+pi-purge --apply
+pi-purge --revert
+pi-purge --uninstall
+pi-purge --edit
 
 # 聊天
 /purge status | apply | revert | uninstall | edit | help
@@ -189,7 +189,7 @@ dsh-purge-safe --edit
 /rewind
 
 # 其它插件已占 /rewind（或 /purge、/rules、/skills）时，这条命令会跳过或改挂
-# /purge-rewind 等备用名；主插件其余命令、工具、/dsh-purge-safe/* 路由不受影响。
+# /purge-rewind 等备用名；主插件其余命令、工具、/pi-purge/* 路由不受影响。
 
 # 模型工具
 purge_status   purge_apply   purge_revert
@@ -203,7 +203,7 @@ purge_status   purge_apply   purge_revert
 
 ### 响应速度
 
-DSH 会按顺序执行同一批中的 Bash 调用。旧版 dsh-purge-safe 把默认前台等待从 60 秒提高到了 10 分钟，一条慢命令会让后续调用一起等待。补丁 #21 现在把带插件标记的旧值恢复为官方的 60 秒。无标记的等待时间和其他自定义值会保留；无标记的 10 分钟无法可靠地区分是插件旧值还是用户设置。
+DSH 会按顺序执行同一批中的 Bash 调用。旧版 pi-purge 把默认前台等待从 60 秒提高到了 10 分钟，一条慢命令会让后续调用一起等待。补丁 #21 现在把带插件标记的旧值恢复为官方的 60 秒。无标记的等待时间和其他自定义值会保留；无标记的 10 分钟无法可靠地区分是插件旧值还是用户设置。
 
 在 macOS/Linux 的 `dsh web` 中，如需更快返回工具结果，可在 `$DSH_HOME/profiles/web/cordis.patch.yml`（通常是 `~/.dsh/profiles/web/cordis.patch.yml`）添加下面的条目。已有相同 id 时修改原条目，不要重复添加。这个 profile 覆盖层在内置配置之后加载，后续应用插件会保留它。
 
@@ -253,7 +253,7 @@ node --check client.js
 flowchart TD
   A["启动或点应用"] --> B{"补丁已经生效?"}
   B -->|是| C["跳过"]
-  B -->|否| D["备份原件为 .dshpurge.bak"]
+  B -->|否| D["备份原件为 .pipurge.bak"]
   D --> E["按补丁列表替换对应文件"]
   E --> F["覆盖 shim"]
   F --> G["注入插件加密默认（提示词框默认显示的那份）"]
@@ -270,7 +270,7 @@ flowchart TD
 
 
 
-每一轮的提示词注入与规则集决策。左边三个输入就是你在 dsh-purge-safe 面板里控制的东西，虚线表示它们各自驱动哪一步判定：
+每一轮的提示词注入与规则集决策。左边三个输入就是你在 pi-purge 面板里控制的东西，虚线表示它们各自驱动哪一步判定：
 
 ```mermaid
 flowchart TD
@@ -305,7 +305,7 @@ flowchart TD
 
 ## 还原
 
-- 每个目标文件在应用前备份为 `<文件>.dshpurge.bak`。
+- 每个目标文件在应用前备份为 `<文件>.pipurge.bak`。
 - 「还原」或 `/purge revert` 用备份覆盖回去并删除备份；没有备份时去掉 shim 里由本插件写入的行。
 - `prompt-inject.md` 是用户文件，还原时保留。
 - 「卸载」会先还原（若已应用），再删除注入文件、规则库和插件本身。

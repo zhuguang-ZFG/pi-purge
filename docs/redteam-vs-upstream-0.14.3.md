@@ -3,9 +3,9 @@
 对照双方：
 
 - 上游 tag **`v0.14.3`**（`COMMIT_REMOVED`）。移植件已经写进本插件，**内网机不要再拉上游仓库**。
-- 插件：`dsh-purge-safe` **1.1.75**，红队在 `lib/redteam/`、`skills/redteam/`；浏览器真正加载的是根目录 `client.js` 嵌入块。
+- 插件：`pi-purge` **1.1.75**，红队在 `lib/redteam/`、`skills/redteam/`；浏览器真正加载的是根目录 `client.js` 嵌入块。
 
-本轮已把 0.14.1–0.14.3 里**可搬**的部分合进插件，并按既定方案保住 A–F、环境适配、不装 worker。拿去另一台电脑装：`docs/redteam-offline-adapt.md` + `dsh-purge-safe-1.1.75.tgz`。
+本轮已把 0.14.1–0.14.3 里**可搬**的部分合进插件，并按既定方案保住 A–F、环境适配、不装 worker。拿去另一台电脑装：`docs/redteam-offline-adapt.md` + `pi-purge-1.1.75.tgz`。
 
 **不一致的本质、两边现状、影响**（按轴写，不按文件 diff）：`docs/redteam-inconsistency-essence.md`。本文只记对齐清单和本轮改了哪些文件。
 

@@ -5,7 +5,7 @@
 带过去只需要一个文件：
 
 ```
-dsh-purge-safe-1.1.75.tgz
+pi-purge-1.1.75.tgz
 ```
 
 文档、技能、演练台源码都在这个包里。整仓拷贝也可以，效果一样。
@@ -22,7 +22,7 @@ dsh-purge-safe-1.1.75.tgz
 node scripts/verify-redteam-port.mjs
 ```
 
-全部 `OK` 再拷 `dsh-purge-safe-1.1.75.tgz`。内网机没有 Node 也可以不跑这条，按第 3 节装完用界面验收。
+全部 `OK` 再拷 `pi-purge-1.1.75.tgz`。内网机没有 Node 也可以不跑这条，按第 3 节装完用界面验收。
 
 重新打包：
 
@@ -32,7 +32,7 @@ node scripts/verify-redteam-port.mjs
 npm pack
 ```
 
-会覆盖根目录的 `dsh-purge-safe-1.1.75.tgz`。
+会覆盖根目录的 `pi-purge-1.1.75.tgz`。
 
 ---
 
@@ -42,7 +42,7 @@ npm pack
 
 | 文件 | 作用 |
 | --- | --- |
-| `dsh-purge-safe-1.1.75.tgz` | 安装用 |
+| `pi-purge-1.1.75.tgz` | 安装用 |
 | 本文 `docs/redteam-offline-adapt.md` | 装完对照（tgz 里也有） |
 
 可选对照（都不需要上游源码）：
@@ -55,7 +55,7 @@ npm pack
 
 - `.scratch/dsh-redteam-mode/`（上游克隆，内网用不上）
 - `node_modules/`
-- 旧的 `dsh-purge-safe-1.1.74.tgz` 等历史包
+- 旧的 `pi-purge-1.1.74.tgz` 等历史包
 
 ---
 
@@ -82,34 +82,34 @@ $env:DSH_HOME = "D:\DeepSeek Harness\.dsh"   # 改成实际那份
 
 ## 3. 安装（本地 tgz，不访问外网）
 
-把 tgz 放到内网机任意目录，例如 `C:\temp\dsh-purge-safe-1.1.75.tgz`。
+把 tgz 放到内网机任意目录，例如 `C:\temp\pi-purge-1.1.75.tgz`。
 
 **Web：**
 
 ```sh
-dsh plugin --profile web add C:\temp\dsh-purge-safe-1.1.75.tgz
+dsh plugin --profile web add C:\temp\pi-purge-1.1.75.tgz
 ```
 
 **桌面：**
 
 ```sh
-dsh plugin --profile desktop add C:\temp\dsh-purge-safe-1.1.75.tgz
+dsh plugin --profile desktop add C:\temp\pi-purge-1.1.75.tgz
 ```
 
 `dsh` 不在 PATH 就换成 `dsh.cmd` 全路径。某个 profile 不存在就跳过那条。
 
 命令行装不上时走手动：
 
-1. 解压 tgz（gzip + tar）。解出来一般是 `package/`，把它改名为 `dsh-purge-safe`，整夹放到 `$DSH_HOME/plugins/dsh-purge-safe`
+1. 解压 tgz（gzip + tar）。解出来一般是 `package/`，把它改名为 `pi-purge`，整夹放到 `$DSH_HOME/plugins/pi-purge`
 2. 只**追加**，不要整段覆盖 profile 的 `package.json`：
-   - `dependencies` 加 `"dsh-purge-safe": "file:../../plugins/dsh-purge-safe"`
-   - `dsh.profile.bundles` 末尾加 `"dsh-purge-safe"`（已有就不要再加）
+   - `dependencies` 加 `"pi-purge": "file:../../plugins/pi-purge"`
+   - `dsh.profile.bundles` 末尾加 `"pi-purge"`（已有就不要再加）
 3. Web 改 `profiles/web/package.json`，桌面改 `profiles/desktop/package.json`
 
 装完必须做：
 
 1. **完全退出再开**刚装的那个宿主：Web 停掉 `dsh web` 再开；桌面退出托盘再开 EXE
-2. 会话标题旁点 **dsh-purge-safe → 清洗 → 应用**
+2. 会话标题旁点 **pi-purge → 清洗 → 应用**
 3. 「应用」成功会再重启一次。Web 按钮只动 Web，桌面只动桌面
 
 技能文件由插件启动时同步到 `$DSH_HOME/redteam/skills`，覆盖同名随包技能。用户自己的副本在 `$DSH_HOME/skills`，这里不动。
@@ -137,10 +137,10 @@ dsh plugin --profile desktop add C:\temp\dsh-purge-safe-1.1.75.tgz
 
 ## 5. 内网机上的离线自检（有 Node 时）
 
-如果拷的是整仓，或已经把插件解到 `plugins/dsh-purge-safe`：
+如果拷的是整仓，或已经把插件解到 `plugins/pi-purge`：
 
 ```sh
-cd $DSH_HOME/plugins/dsh-purge-safe
+cd $DSH_HOME/plugins/pi-purge
 node scripts/verify-redteam-port.mjs
 ```
 

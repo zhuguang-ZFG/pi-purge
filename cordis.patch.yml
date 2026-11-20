@@ -1,9 +1,9 @@
-# dsh-purge-safe bundle patch
+# pi-purge bundle patch
 #
 # 清洗 + 演练台都在本插件内（lib/redteam、presets/redteam、skills/redteam）。
-# 只装 dsh-purge-safe，不外接、不 link 其它红队包。
+# 只装 pi-purge，不外接、不 link 其它红队包。
 #
-# 和 1.1.71 一样：bundle 里已有 dsh-purge-safe 时靠 `- id: dsh-purge-safe` 补 inject；
+# 和 1.1.71 一样：bundle 里已有 pi-purge 时靠 `- id: pi-purge` 补 inject；
 # 没有这条时设置页/工具挂不上。
 #
 # 下面这几条 `entry "xxx" not found` 是**预期噪音**：它们是给"以前装过独立红队包"的
@@ -37,12 +37,12 @@
     personaPrefix: ""
     personaSuffix: ""
 
-- id: dsh-purge-safe
+- id: pi-purge
   inject: [systemPrompt, tools]
 
 - insert:
-    - id: dsh-purge-safe
-      name: 'dsh-purge-safe'
+    - id: pi-purge
+      name: 'pi-purge'
       inject: [systemPrompt, tools]
       config:
         enabled: true
@@ -66,15 +66,15 @@
         toolGateBypass: true
 
     # 演练台：预设 + 技能落地（本插件 lib/redteam）
-    - id: dsh-purge-safe-redteam
-      name: dsh-purge-safe/redteam
+    - id: pi-purge-redteam
+      name: pi-purge/redteam
 
     # 演练台事实库（SQLite），数据在 $DSH_HOME/redteam
-    - id: dsh-purge-safe-redteam-store
-      name: dsh-purge-safe/redteam/store
+    - id: pi-purge-redteam-store
+      name: pi-purge/redteam/store
       config:
         root: !!js dshHomePath('redteam')
 
     # 演练台 HTTP 桥 POST /redteam/api
-    - id: dsh-purge-safe-redteam-ui
-      name: dsh-purge-safe/redteam/ui
+    - id: pi-purge-redteam-ui
+      name: pi-purge/redteam/ui

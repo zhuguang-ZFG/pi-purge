@@ -1,8 +1,13 @@
-dsh-purge-safe
-Copyright 2026 CallMeGuLab
+pi-purge
+Copyright 2026 CallMeGuLab / zhuguang-ZFG
 
-Source project: dsh-purge-safe (CallMeGuLab)
-Maintained by CallMeGuLab.
+Upstream source project: dsh-purge-safe (CallMeGuLab)
+  https://github.com/CallMeGuLab/dsh-purge-safe
+This repository is a derivative work renamed and repackaged as pi-purge.
+Upstream authorship and the Apache-2.0 license are retained in full.
+
+Maintained by zhuguang-ZFG.
+Repository: https://github.com/zhuguang-ZFG/pi-purge
 
 This product is licensed under the Apache License, Version 2.0.
 Derivative works must retain this NOTICE and attribute the source repository.

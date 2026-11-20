@@ -1,6 +1,6 @@
 /**
  * 把 lib/redteam/client.js 抽成可嵌入的工厂片段，
- * 写进 client.js 里的 DSH_PURGE_DRILL 标记之间。
+ * 写进 client.js 里的 PI_PURGE_DRILL 标记之间。
  *
  * 用法：node scripts/build-client.mjs
  */
@@ -12,10 +12,10 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const drillSrc = join(root, "lib", "redteam", "client.js");
 const clientPath = join(root, "client.js");
 
-const BEGIN = "/* __DSH_PURGE_DRILL_BEGIN__ */";
-const END = "/* __DSH_PURGE_DRILL_END__ */";
-const THEME_BEGIN = "/* __DSH_PURGE_THEME_BEGIN__ */";
-const THEME_END = "/* __DSH_PURGE_THEME_END__ */";
+const BEGIN = "/* __PI_PURGE_DRILL_BEGIN__ */";
+const END = "/* __PI_PURGE_DRILL_END__ */";
+const THEME_BEGIN = "/* __PI_PURGE_THEME_BEGIN__ */";
+const THEME_END = "/* __PI_PURGE_THEME_END__ */";
 
 let raw = readFileSync(drillSrc, "utf8").replace(/\r\n/g, "\n");
 const sharedThemeJs = readFileSync(join(root, "lib", "ui-theme.js"), "utf8")
@@ -40,7 +40,7 @@ function embedJavaScript(source, markerBegin, markerEnd, script, factoryMarker) 
 	return source.slice(0, insertAt) + fragment + "\n" + source.slice(insertAt);
 }
 raw = embedJavaScript(raw, THEME_BEGIN, THEME_END, sharedThemeJs, "factory: (require) => {");
-raw = embedJavaScript(raw, "/* __DSH_PURGE_FULLSCREEN_BEGIN__ */", "/* __DSH_PURGE_FULLSCREEN_END__ */", fullscreenJs, "factory: (require) => {");
+raw = embedJavaScript(raw, "/* __PI_PURGE_FULLSCREEN_BEGIN__ */", "/* __PI_PURGE_FULLSCREEN_END__ */", fullscreenJs, "factory: (require) => {");
 // Keep authored styles separate while shipping the same dependency-free bundle.
 const escapeTemplateCss = (css) => css.replaceAll("\\", "\\\\").replaceAll("`", "\\`").replaceAll("${", "\\${");
 function embedStyles(source, declaration, marker, css) {
@@ -105,7 +105,7 @@ body = body.slice(0, applyAt) + applyParts + body.slice(j);
 
 const fragment = `${BEGIN}
 		// 内嵌演练台（源码在 lib/redteam，已并进本插件）
-		const __dshPurgeDrill = (() => {
+		const __piPurgeDrill = (() => {
 			var module = { exports: {} };
 			var exports = module.exports;
 ${body}
@@ -116,7 +116,7 @@ ${END}`;
 let client = readFileSync(clientPath, "utf8");
 client = embedStyles(client, "const PURGE_CSS = `", "DSH_PRODUCT_SHELL", sharedTheme + "\n\n" + readFileSync(join(root, "lib", "product-shell.css"), "utf8") + "\n\n" + glassSkin + "\n\n" + workbenchLayout);
 client = embedJavaScript(client, THEME_BEGIN, THEME_END, sharedThemeJs, "factory: (require) => {");
-client = embedJavaScript(client, "/* __DSH_PURGE_FULLSCREEN_BEGIN__ */", "/* __DSH_PURGE_FULLSCREEN_END__ */", fullscreenJs, "factory: (require) => {");
+client = embedJavaScript(client, "/* __PI_PURGE_FULLSCREEN_BEGIN__ */", "/* __PI_PURGE_FULLSCREEN_END__ */", fullscreenJs, "factory: (require) => {");
 if (!client.includes(BEGIN) || !client.includes(END)) {
 	throw new Error("client.js missing drill markers; run patch-client-dock.mjs first");
 }

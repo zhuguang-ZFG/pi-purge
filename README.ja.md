@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="docs/banner.svg" alt="dsh-purge-safe" width="720">
+  <img src="docs/banner.svg" alt="pi-purge" width="720">
 </p>
 
-<h1 align="center">⚔️ DeepSeek Harness サイバーセキュリティ レッドチームツール (dsh-purge-safe)</h1>
+<h1 align="center">⚔️ DeepSeek Harness サイバーセキュリティ レッドチームツール (pi-purge)</h1>
 
 <p align="center"><strong>バージョン 2.0.0</strong></p>
 
@@ -56,37 +56,37 @@ Telegram コミュニティで最新情報を確認し、学習・情報交換�
 
 ## これは何か
 
-**dsh-purge-safe** は、ローカルにインストールされた公式 [DeepSeek Harness](https://www.deepseek.com/harness/) 向けのサイバーセキュリティ評価プラグインです。このフル機能版は **DSH 0.2.2-rc.3** と **Super Agent** に対応します。公式 **Web**（`dsh web`）と公式**デスクトップ EXE** に対応し、インストールと Apply は別々に行います。
+**pi-purge** は、ローカルにインストールされた公式 [DeepSeek Harness](https://www.deepseek.com/harness/) 向けのサイバーセキュリティ評価プラグインです。このフル機能版は **DSH 0.2.2-rc.3** と **Super Agent** に対応します。公式 **Web**（`dsh web`）と公式**デスクトップ EXE** に対応し、インストールと Apply は別々に行います。
 
 Harness は単にプロンプトを転送するだけではありません。プロンプトの書き換え、承認ゲート、サンドボックスポリシー、セッション移行を実行時に行います。「モデルは答えるか」だけを問うと、ホスト層のブロックをモデルの拒否と取り違えてしまいます。このプラグインは、あなた自身のインストール環境でこの 2 つの層を分離し、制御された評価や、どのデフォルトポリシーが過度に厳しいかを確認するために使います。
 
 | 得られるもの | 内容 |
 |---|---|
-| **dsh-purge-safe ドック** | セッションタイトルの横のボタンで右ドックを開く。2 ページ: Clean と Drill |
+| **pi-purge ドック** | セッションタイトルの横のボタンで右ドックを開く。2 ページ: Clean と Drill |
 | **Clean** | グループ化されたパッチ状況、Apply / Restore / Uninstall、プロンプトエディタ、複数のルールセット |
 | **Drill** | 安定版に内蔵。認可後: アセットとローカル環境。スキルライブラリとナレッジベースも同梱されます。ローカルラボ専用 |
 | **ホストポリシー** | デフォルトのコピー、権限ポリシー、ツール制限。公式の機能はそのまま。2 つ目の架空アイデンティティは作らない |
 | **起動時** | ローカル版では自動適用は初期設定で無効です。Clean → Apply を使用し、必要に応じて起動時の再適用を設定します。 |
 
-ドライブレターのハードコードはありません。`$DSH_HOME`、dsh ランチャー横の `.dsh`、次に `~/.dsh` を参照します。Harness のソースツリーにはパッチしません。変更を書き込むのは **dsh-purge-safe** の **Clean** ページの **Apply** です。アイデンティティはプラグインに同梱された暗号化プロンプト、つまりプロンプトボックスがデフォルトで表示するテキストから来ます。ホストのプロンプトファイルは読みません。
+ドライブレターのハードコードはありません。`$DSH_HOME`、dsh ランチャー横の `.dsh`、次に `~/.dsh` を参照します。Harness のソースツリーにはパッチしません。変更を書き込むのは **pi-purge** の **Clean** ページの **Apply** です。アイデンティティはプラグインに同梱された暗号化プロンプト、つまりプロンプトボックスがデフォルトで表示するテキストから来ます。ホストのプロンプトファイルは読みません。
 
 触れるのはユーザーのマシン上の公式 `@deepseek-ai` パッケージとローカル設定だけです。公開スキャナーでもなく、第三者サイトへの攻撃キットでもありません。リポジトリにマルウェア、未認可のエクスプロイトスクリプト、公開インターネットを狙うペイロードは同梱されていません。
 
 ---
 
-## オリジナルの転売は禁止。フォークは帰属表示が必須。
+## 本プロジェクトは二次開発版です。上流の帰属表示が必須です。
 
-## 要帰属表示
+## 出所と帰属
 
-**オリジナルビルドの転売は禁止です。** 有料転売、ストア掲載のための再スキン、商用製品としての配布は許可されません。
+**pi-purge は CallMeGuLab による [dsh-purge-safe](https://github.com/CallMeGuLab/dsh-purge-safe) の二次開発版**であり、zhuguang-ZFG が名称変更・再パッケージして維持しています。上流のコード、プロンプト、スキルライブラリの著作権はすべて原作者に帰属し、本リポジトリは Apache-2.0 に従って帰属表示を保持したまま再配布します。
 
-**フォークは帰属表示が必須** で、出所のリポジトリを明記してください: [dsh-purge-safe / CallMeGuLab](./NOTICE)。名前、アイデア、コード、プロンプトを借用する場合も同様です。
+上流の帰属要件は下流にも引き継がれます。**再フォーク時は帰属表示が必須**で、本リポジトリ [pi-purge / zhuguang-ZFG](https://github.com/zhuguang-ZFG/pi-purge) と上流 [dsh-purge-safe / CallMeGuLab](https://github.com/CallMeGuLab/dsh-purge-safe) の両方を明記してください。
 
-帰属表示の削除、出所の隠蔽、オリジナルの転売は、運営チームとして追及します。
+**転売は禁止です。** 本プロジェクトおよび上流オリジナルの有償転売、ストア向けの再スキン、商用製品としての配布は許可されません。
 
 ## ライセンス
 
-本リポジトリは [Apache License 2.0](./LICENSE) です。フォークおよび再配布では著作権表示と [NOTICE](./NOTICE) を保持し、[dsh-purge-safe / CallMeGuLab](./NOTICE) を明記してください。オリジナルの転売は禁止です。
+本リポジトリは [Apache License 2.0](./LICENSE) です。フォークおよび再配布では著作権表示と [NOTICE](./NOTICE) を保持し、[pi-purge / zhuguang-ZFG](https://github.com/zhuguang-ZFG/pi-purge) と上流 [dsh-purge-safe / CallMeGuLab](https://github.com/CallMeGuLab/dsh-purge-safe) を明記してください。
 
 ---
 
@@ -137,17 +137,17 @@ Harness は単にプロンプトを転送するだけではありません。プ
 
 ## インストール
 
-アーカイブを `dsh-purge-safe` という名前のローカルディレクトリに展開し、実際に使用するホストにインストールします。
+アーカイブを `pi-purge` という名前のローカルディレクトリに展開し、実際に使用するホストにインストールします。
 
 ```sh
 # 公式 dsh web。実際の展開先に置き換えてください
-dsh plugin --profile web add /absolute/path/to/dsh-purge-safe
+dsh plugin --profile web add /absolute/path/to/pi-purge
 
 # 公式デスクトップ EXE
-dsh plugin --profile desktop add /absolute/path/to/dsh-purge-safe
+dsh plugin --profile desktop add /absolute/path/to/pi-purge
 ```
 
-ホストを完全に終了して再起動し、セッションタイトル横の **dsh-purge-safe → Clean → Apply** を選択します。Apply が成功すると一度再起動します。`/purge status` でホームとパッチ状況を確認します。
+ホストを完全に終了して再起動し、セッションタイトル横の **pi-purge → Clean → Apply** を選択します。Apply が成功すると一度再起動します。`/purge status` でホームとパッチ状況を確認します。
 
 <a id="manual"></a>
 <a id="手動"></a>
@@ -155,9 +155,9 @@ dsh plugin --profile desktop add /absolute/path/to/dsh-purge-safe
 ### 手動インストール
 
 1. `profiles/web` または `profiles/desktop` を含む、使用中の `$DSH_HOME` を確認します。
-2. プラグインを `$DSH_HOME/plugins/dsh-purge-safe` に配置します。
-3. 対象プロファイルの `package.json` の `dependencies` に `"dsh-purge-safe": "file:../../plugins/dsh-purge-safe"`、`dsh.profile.bundles` に `"dsh-purge-safe"` を追加します。既存の設定は保持します。
-4. そのプロファイルで `pnpm install` を実行し、`node_modules/dsh-purge-safe/package.json` を確認します。
+2. プラグインを `$DSH_HOME/plugins/pi-purge` に配置します。
+3. 対象プロファイルの `package.json` の `dependencies` に `"pi-purge": "file:../../plugins/pi-purge"`、`dsh.profile.bundles` に `"pi-purge"` を追加します。既存の設定は保持します。
+4. そのプロファイルで `pnpm install` を実行し、`node_modules/pi-purge/package.json` を確認します。
 5. ホストを完全に再起動して **Clean → Apply** を選択します。
 
 アンインストールは **Clean → Uninstall** または `/purge uninstall` です。このアーカイブはローカルインストール用で、リモートリポジトリのインストール先を含みません。
@@ -175,11 +175,11 @@ dsh plugin --profile desktop add /absolute/path/to/dsh-purge-safe
 ## 使い方
 
 ```sh
-dsh-purge-safe --status
-dsh-purge-safe --apply
-dsh-purge-safe --revert
-dsh-purge-safe --uninstall
-dsh-purge-safe --edit
+pi-purge --status
+pi-purge --apply
+pi-purge --revert
+pi-purge --uninstall
+pi-purge --edit
 
 /purge status | apply | revert | uninstall | edit | help
 /rules list | use <id> | create <id> | delete <id> | reset | help
@@ -187,7 +187,7 @@ dsh-purge-safe --edit
 
 # 別のプラグインがすでに /rewind（または /purge, /rules, /skills）を
 # 所有している場合、その名前はスキップされるか /purge-rewind として
-# 再マウントされます。ほかのコマンド、ツール、/dsh-purge-safe/* ルートは動作し続けます。
+# 再マウントされます。ほかのコマンド、ツール、/pi-purge/* ルートは動作し続けます。
 
 purge_status   purge_apply   purge_revert
 ```
@@ -200,7 +200,7 @@ Apply が成功すると、変更済みのパッケージを読み込むため�
 
 ### 応答速度
 
-DSH はツールバッチ内の Bash 呼び出しを 1 つずつ実行します。古い dsh-purge-safe リリースはデフォルトのフォアグラウンド待機を 60 秒から 10 分に引き上げていたため、1 つの遅いコマンドが後続の呼び出しをその間ブロックしていました。patch #21 は、マークされたプラグインの値を公式の 60 秒デフォルトに戻します。マークされていないタイムアウトやその他のカスタム値は保持されます。マークのない 10 分の値はユーザー設定と確実に区別できません。
+DSH はツールバッチ内の Bash 呼び出しを 1 つずつ実行します。古い pi-purge リリースはデフォルトのフォアグラウンド待機を 60 秒から 10 分に引き上げていたため、1 つの遅いコマンドが後続の呼び出しをその間ブロックしていました。patch #21 は、マークされたプラグインの値を公式の 60 秒デフォルトに戻します。マークされていないタイムアウトやその他のカスタム値は保持されます。マークのない 10 分の値はユーザー設定と確実に区別できません。
 
 `dsh web`（macOS/Linux）で待機を短くするには、`$DSH_HOME/profiles/web/cordis.patch.yml`（通常 `~/.dsh/profiles/web/cordis.patch.yml`）に次のエントリを追加します。重複を追加せず、同じ id の既存エントリを編集してください。このプロファイル層は同梱設定の後に適用されるので、今後のプラグイン Apply でもオーバーライドが維持されます。
 
@@ -254,7 +254,7 @@ Apply（起動時または Apply クリック時）:
 flowchart TD
   A["起動または Apply クリック"] --> B{"パッチは既に適用済み？"}
   B -->|はい| C["スキップ"]
-  B -->|いいえ| D["オリジナルを .dshpurge.bak としてバックアップ"]
+  B -->|いいえ| D["オリジナルを .pipurge.bak としてバックアップ"]
   D --> E["マッチしたファイルを置換"]
   E --> F["シムを上書き"]
   F --> G["プラグインに同梱された暗号化プロンプト、プロンプトボックスがデフォルトで表示するテキストを注入"]
@@ -267,7 +267,7 @@ flowchart TD
   A["再起動または新規セッション"] --> B["プラグインの暗号化デフォルトを注入。保存クリックもホストのプロンプトファイルも無し"]
 ```
 
-毎ターンのプロンプトインジェクションとルールセット判定。左側の 3 つの入力は dsh-purge-safe パネルで制御するもので、点線の辺はそれぞれがどの判定を駆動するかを示します:
+毎ターンのプロンプトインジェクションとルールセット判定。左側の 3 つの入力は pi-purge パネルで制御するもので、点線の辺はそれぞれがどの判定を駆動するかを示します:
 
 ```mermaid
 flowchart TD
@@ -300,7 +300,7 @@ flowchart TD
 
 ## 復元
 
-- 各ターゲットは最初の apply 前に `<file>.dshpurge.bak` にコピーされます。
+- 各ターゲットは最初の apply 前に `<file>.pipurge.bak` にコピーされます。
 - **Restore** または `/purge revert` はバックアップを戻して削除します。バックアップが無い場合は、このプラグインが書いたシム行を取り除きます。
 - `prompt-inject.md` はユーザーファイルなので保持されます。
 - **Uninstall** はパッチが適用されていればまず復元し、その後 inject ファイル、ルールライブラリ、プラグイン本体を削除します。

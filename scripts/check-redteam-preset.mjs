@@ -9,7 +9,7 @@
  * 判读：
  *   HEALTHY            → 重启宿主后模式下拉里就有「红队模式」
  *   ACTIVE BROKEN      → 说明预设文件里还有解析不到的包名，按输出的 id/name 修
- *   preset missing     → 插件没跑过，先在宿主里启用 dsh-purge-safe 并重启
+ *   preset missing     → 插件没跑过，先在宿主里启用 pi-purge 并重启
  *   declare phase 非 registered → 插件注册失败，看 error 字段
  */
 import fs from 'node:fs'
@@ -74,7 +74,7 @@ function requireBases(home) {
     '/data/deepseek-harness/npm-global/lib/node_modules/@deepseek-ai/dsh/package.json',
   ]
   for (const g of guesses) if (exists(g)) list.push(g)
-  // 预设里 `dsh-purge-safe/redteam/tools` 这类本插件自己的子路径，
+  // 预设里 `pi-purge/redteam/tools` 这类本插件自己的子路径，
   // 在没有 profile 的裸 home 下也要能解析，否则自检会伪报 redteam-tools 缺失。
   const selfPkg = path.join(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1')), '..', 'package.json')
   if (exists(selfPkg)) list.push(selfPkg)
@@ -126,7 +126,7 @@ if (exists(metaFile)) {
 }
 
 if (!exists(presetFile)) {
-  console.log('\n结果: preset missing —— 先在宿主里启用 dsh-purge-safe 并重启一次，让插件落地预设。')
+  console.log('\n结果: preset missing —— 先在宿主里启用 pi-purge 并重启一次，让插件落地预设。')
   process.exit(1)
 }
 

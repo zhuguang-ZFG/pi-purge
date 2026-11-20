@@ -7,7 +7,7 @@
 
 | 名称 | 位置 | 版本 / 状态 |
 | --- | --- | --- |
-| 本插件 | `lib/redteam/`、`skills/redteam/`、`presets/redteam/` | `dsh-purge-safe` 1.1.75（`package.json` 仍写 `0.0.1`，不动） |
+| 本插件 | `lib/redteam/`、`skills/redteam/`、`presets/redteam/` | `pi-purge` 1.1.75（`package.json` 仍写 `0.0.1`，不动） |
 | 宿主 | DeepSeek Harness | 0.2.2-rc.3 |
 | superagent 原型 | `.scratch/superagent-proto`（[Jueze-2019/dsh-redteam-mode] 之外的另一套） | README 自称 "Research prototype for reference only" |
 
@@ -199,8 +199,8 @@ superagent 的一半复杂度来自 Source（飞书事件消费、GitHub 通知�
 
 借**「插件消息必须带自己的 identity」**这一条，这是最便宜、收益最大的一条。
 本插件已经有正确范例：`lib/continue-retry.js:128` 的 `makeContinueMessage` 用
-`source: { kind: "dsh-purge-safe", form: "notice" }`，并且 `hasFreshHumanTurn`（`:246`）
-明确按 `source.kind` 过滤掉 `"plugin"` / `"dsh-purge-safe"`。
+`source: { kind: "pi-purge", form: "notice" }`，并且 `hasFreshHumanTurn`（`:246`）
+明确按 `source.kind` 过滤掉 `"plugin"` / `"pi-purge"`。
 **但唤醒「去处理」的那条消息没有走这条路** —— 它走渲染层 submit，因此变成了「真人说的话」。
 这是 §6 记录的缺陷的直接成因之一。
 
@@ -530,7 +530,7 @@ superagent 的一半复杂度来自 Source（飞书事件消费、GitHub 通知�
 - source 全部是 `{ kind: "user", rpcId: ..., clientTimeZone: "Asia/Shanghai" }`。
 
 `kind: "user"` + `rpcId` 意味着：这是渲染层通过宿主 RPC 真实提交的，**不是插件写的**。
-插件写的消息会带 `kind: "plugin"` 或 `kind: "dsh-purge-safe"`（正确写法见
+插件写的消息会带 `kind: "plugin"` 或 `kind: "pi-purge"`（正确写法见
 `lib/continue-retry.js:128`）。
 
 ### 6.3 成因链（两条缺陷叠加）
